@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="cellContainer">
+        <HBox>
+            <CheckBox fx:id="enableCheckBox" mnemonicParsing="false" text="戦略名">
+                <font>
+                    <Font name="System Bold" size="14.0"/>
+                </font>
+            </CheckBox>
+        </HBox>
+        <Label fx:id="strategyClassNameLabel" text="クラス名"/>
+    </VBox>
+</AnchorPane>

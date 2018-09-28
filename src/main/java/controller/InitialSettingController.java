@@ -1,0 +1,163 @@
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import application.RouletteContext;
+import constants.Configurations;
+import enums.RouletteType;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+/**
+ * 初期設定画面コントローラー.
+ *
+ * @author
+ */
+public class InitialSettingController extends BaseController {
+
+	/**
+	 * このアプリについて.
+	 */
+	@FXML
+	private MenuItem aboutMenuItem;
+
+	/**
+	 * ルーレットのタイプ.
+	 */
+	@FXML
+	private RadioButton rouletteTypeRadioButton1;
+
+	@FXML
+	private RadioButton rouletteTypeRadioButton2;
+
+	@FXML
+	private RadioButton rouletteTypeRadioButton3;
+
+	/**
+	 * 初期所持金.
+	 */
+	@FXML
+	private TextField initialBalanceTextField;
+
+	/**
+	 * 最小ベット額.
+	 */
+	@FXML
+	private TextField minimumBetTextField;
+
+	/**
+	 * 最大ベット額.
+	 */
+	@FXML
+	private TextField maximumBetTextField;
+
+	/**
+	 * 実行モード.
+	 */
+	@FXML
+	private RadioButton runModeRadioButton1;
+
+	@FXML
+	private RadioButton runModeRadioButton2;
+
+	/**
+	 * 戦略選択ボタン.
+	 */
+	@FXML
+	private Button selectStrategyButton;
+
+	/**
+	 * スタートボタン.
+	 */
+	@FXML
+	private Button startButton;
+
+	@Override
+	public void setOnCloseRequest(WindowEvent event) {
+		// TODO
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// 初期値を設定
+		initialBalanceTextField.setText(String.valueOf(Configurations.DEFAULT_INITIAL_BALANCE));
+		minimumBetTextField.setText(String.valueOf(Configurations.DEFAULT_MINIMUM_BET));
+		maximumBetTextField.setText(String.valueOf(Configurations.DEFAULT_MAXIMUM_BET));
+
+		// このアプリについて
+		aboutMenuItem.setOnAction(event -> {
+			// アラートを表示
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("ルーレットシミュレーター");
+			alert.setHeaderText("見出");
+			alert.setContentText("製作者 cyrus");
+			alert.show();
+		});
+
+		// 戦略選択ボタンをクリックした時
+		selectStrategyButton.setOnMouseClicked(event -> {
+			// 新しいウインドウを生成
+			Stage newStage = new Stage();
+			// モーダルウインドウに設定
+			newStage.initModality(Modality.APPLICATION_MODAL);
+			newStage.initOwner(getThisStage());
+
+			// 戦略選択画面を表示
+			openSelectStrategyList(newStage, createRouletteContext());
+		});
+
+		// スタートボタンをクリックした時
+		startButton.setOnMouseClicked(event -> {
+			// 新しいウインドウを生成
+			Stage newStage = new Stage();
+			// モーダルウインドウに設定
+			newStage.initModality(Modality.APPLICATION_MODAL);
+			newStage.initOwner(getThisStage());
+
+			// シミュレーションモード画面を表示
+			openSimulationMode(newStage, createRouletteContext());
+		});
+	}
+
+	/**
+	 * ルーレットのコンテキストを作成して取得.
+	 *
+	 * @return
+	 */
+	private RouletteContext createRouletteContext() {
+		// 設定値を取得
+		RouletteType rouletteType = null;
+		if (rouletteTypeRadioButton1.isSelected()) {
+			rouletteType = RouletteType.ONE_TO_36;
+		} else if (rouletteTypeRadioButton2.isSelected()) {
+			rouletteType = RouletteType.EUROPEAN_STYLE;
+		} else if (rouletteTypeRadioButton3.isSelected()) {
+			rouletteType = RouletteType.AMERICAN_STYLE;
+		}
+		long initialBalance = Long.parseLong(initialBalanceTextField.getText());
+		long minimumBet = Long.parseLong(minimumBetTextField.getText());
+		long maximumBet = Long.parseLong(maximumBetTextField.getText());
+
+		// 設定値を出力
+		System.out.println("ルーレットのタイプ=" + rouletteType.name());
+		System.out.println("初期所持金=" + initialBalance);
+		System.out.println("最小ベット額=" + minimumBet);
+		System.out.println("最大ベット額=" + maximumBet);
+		if (runModeRadioButton1.isSelected()) {
+			System.out.println("実行モード=" + runModeRadioButton1.getText());
+		} else if (runModeRadioButton2.isSelected()) {
+			System.out.println("実行モード=" + runModeRadioButton2.getText());
+		}
+
+		// ルーレットのコンテキストを作成
+		return new RouletteContext(rouletteType, initialBalance, minimumBet, maximumBet);
+	}
+}

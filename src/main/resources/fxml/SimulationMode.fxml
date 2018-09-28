@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SimulationModeController">
+    <center>
+        <ListView fx:id="strategyListView" prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+            <HBox>
+                <Label text="現在の試行回数">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin>
+                </Label>
+                <Label fx:id="currentLoopCountLabel" text="currentLoopCountTextField">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Label>
+            </HBox>
+            <HBox>
+                <Label text="出現率">
+                    <HBox.margin>
+                        <Insets right="5.0" />
+                    </HBox.margin>
+                </Label>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                      <Label fx:id="redRateLabel" text="赤" textFill="RED" GridPane.halignment="RIGHT">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="greenRateLabel" text="緑" textFill="#00aa00" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="blackRateLabel" text="黒" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                      </Label>
+               </children>
+            </GridPane>
+            </HBox>
+        </VBox>
+    </top>
+</BorderPane>

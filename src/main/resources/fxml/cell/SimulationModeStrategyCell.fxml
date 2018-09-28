@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="cellContainer" maxWidth="-Infinity" prefWidth="460.0">
+        <Label fx:id="strategyNameLabel" prefWidth="460.0" text="戦略名">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <GridPane hgap="5.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <Label text="現在の所持金" GridPane.halignment="RIGHT"/>
+            <Label text="差額" GridPane.columnIndex="2" GridPane.halignment="RIGHT"/>
+            <Label text="所持金の最大値" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+            <Label text="所持金の最小値" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+            <Label text="前回のベット額" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label text="ベット額の最大値" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label text="勝率" GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
+            <Label text="総ベット額" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+            <Label text="総配当額" GridPane.columnIndex="2" GridPane.halignment="RIGHT"
+                   GridPane.rowIndex="3"/>
+            <Label text="平均ベット額" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+            <Label text="平均配当額" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+            <Label fx:id="currentBalanceLabel" text="currentBalanceLabel" GridPane.columnIndex="1"
+                   GridPane.halignment="RIGHT"/>
+            <Label fx:id="differenceWithInitialBalanceLabel" text="differenceWithInitialBalanceLabel"
+                   GridPane.columnIndex="3" GridPane.halignment="RIGHT"/>
+            <Label fx:id="maximumBalanceLabel" text="maximumBalanceLabel" GridPane.columnIndex="1"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+            <Label fx:id="minimumBalanceLabel" text="minimumBalanceLabel" GridPane.columnIndex="3"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+            <Label fx:id="lastTotalBetValueLabel" text="lastTotalBetValueLabel" GridPane.columnIndex="1"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label fx:id="maximumTotalBetValueLabel" text="maximumTotalBetValueLabel" GridPane.columnIndex="3"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label fx:id="winningAverageLabel" text="winningAverageLabel" GridPane.columnIndex="1"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="5"/>
+            <Label fx:id="wholeTotalBetValueLabel" text="wholeTotalBetValueLabel"
+                   GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Label fx:id="averageTotalBetValueLabel" text="averageTotalBetValueLabel"
+                   GridPane.halignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <Label fx:id="wholeTotalPayoutLabel" text="wholeTotalPayoutLabel"
+                   GridPane.halignment="RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+            <Label fx:id="averageTotalPayoutLabel" text="averageTotalPayoutLabel"
+                   GridPane.halignment="RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+        </GridPane>
+    </VBox>
+</AnchorPane>
