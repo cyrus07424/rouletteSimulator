@@ -1,10 +1,8 @@
 package predictor;
 
-import application.RouletteContext;
-import constants.Configurations;
-import enums.Spot;
-import model.BetTypePrediction;
-import model.SpotPrediction;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -21,8 +19,11 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-import java.util.ArrayList;
-import java.util.List;
+import application.RouletteContext;
+import constants.Configurations;
+import enums.Spot;
+import model.BetTypePrediction;
+import model.SpotPrediction;
 
 /**
  * Rnn予測器.
@@ -116,8 +117,8 @@ public class RnnPredictor extends BasePredictor {
 
 		// パラメータ設定
 		NeuralNetConfiguration.Builder builder = new NeuralNetConfiguration.Builder();
-		builder.iterations(10);
-		builder.learningRate(0.001);
+		// builder.iterations(10);
+		// builder.learningRate(0.001);
 		builder.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT);
 		builder.seed(123);
 		builder.biasInit(0);
