@@ -3,11 +3,9 @@ package predictor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
-import org.deeplearning4j.nn.conf.Updater;
-import org.deeplearning4j.nn.conf.layers.GravesLSTM;
+import org.deeplearning4j.nn.conf.layers.LSTM;
 import org.deeplearning4j.nn.conf.layers.RnnOutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
@@ -17,6 +15,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.impl.indexaccum.IMax;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.learning.config.RmsProp;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import application.RouletteContext;
@@ -24,6 +23,7 @@ import constants.Configurations;
 import enums.Spot;
 import model.BetTypePrediction;
 import model.SpotPrediction;
+import utils.LogHelper;
 
 /**
  * Rnn予測器.
@@ -72,7 +72,7 @@ public class RnnPredictor extends BasePredictor {
 			// 有効な出目一覧
 			List<Spot> availableSpotList = Spot.getAvailableList(rouletteContext.rouletteType);
 
-			INDArray testInit = Nd4j.zeros(availableSpotList.size());
+			INDArray testInit = Nd4j.zeros(1, availableSpotList.size(), 1);
 			testInit.putScalar(availableSpotList.indexOf(rouletteContext.spotHistoryList.getFirst()), 1);
 
 			// run one step -> IMPORTANT: rnnTimeStep() must be called, not
@@ -89,14 +89,17 @@ public class RnnPredictor extends BasePredictor {
 				// chance to get chosen
 				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output), 1).getInt(0);
 
+				// print the chosen output
+				// System.out.print(availableSpotList.get(sampledCharacterIdx));
+
 				// use the last output as input
-				INDArray nextInput = Nd4j.zeros(availableSpotList.size());
+				INDArray nextInput = Nd4j.zeros(1, availableSpotList.size(), 1);
 				nextInput.putScalar(availableSpotList.indexOf(rouletteContext.spotHistoryList.get(i)), 1);
 				output = useNet.rnnTimeStep(nextInput);
 			}
 
 			int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output), 1).getInt(0);
-			System.out.println("次の予想:" + availableSpotList.get(sampledCharacterIdx));
+			LogHelper.info("次の予想:" + availableSpotList.get(sampledCharacterIdx));
 
 			// 予測を作成
 			spotPredictionList.add(new SpotPrediction(availableSpotList.get(sampledCharacterIdx), 1));
@@ -117,23 +120,20 @@ public class RnnPredictor extends BasePredictor {
 
 		// パラメータ設定
 		NeuralNetConfiguration.Builder builder = new NeuralNetConfiguration.Builder();
-		// builder.iterations(10);
-		// builder.learningRate(0.001);
-		builder.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT);
 		builder.seed(123);
 		builder.biasInit(0);
 		builder.miniBatch(false);
-		builder.updater(Updater.RMSPROP);
+		builder.updater(new RmsProp(0.001));
 		builder.weightInit(WeightInit.XAVIER);
 
 		NeuralNetConfiguration.ListBuilder listBuilder = builder.list();
 
-		// first difference, for rnns we need to use GravesLSTM.Builder
+		// first difference, for rnns we need to use LSTM.Builder
 		for (int i = 0; i < HIDDEN_LAYER_CONT; i++) {
-			GravesLSTM.Builder hiddenLayerBuilder = new GravesLSTM.Builder();
+			LSTM.Builder hiddenLayerBuilder = new LSTM.Builder();
 			hiddenLayerBuilder.nIn(i == 0 ? availableSpotList.size() : HIDDEN_LAYER_WIDTH);
 			hiddenLayerBuilder.nOut(HIDDEN_LAYER_WIDTH);
-			// adopted activation function from GravesLSTMCharModellingExample
+			// adopted activation function from LSTMCharModellingExample
 			// seems to work well with RNNs
 			hiddenLayerBuilder.activation(Activation.TANH);
 			listBuilder.layer(i, hiddenLayerBuilder.build());
@@ -180,7 +180,8 @@ public class RnnPredictor extends BasePredictor {
 
 		// some epochs
 		for (int epoch = 0; epoch < 100; epoch++) {
-			System.out.println("Epoch " + epoch);
+
+			LogHelper.debug("Epoch " + epoch);
 
 			// train the data
 			net.fit(trainingData);
@@ -189,7 +190,7 @@ public class RnnPredictor extends BasePredictor {
 			net.rnnClearPreviousState();
 
 			// put the first character into the rrn as an initialisation
-			INDArray testInit = Nd4j.zeros(availableSpotList.size());
+			INDArray testInit = Nd4j.zeros(1, availableSpotList.size(), 1);
 			testInit.putScalar(availableSpotList.indexOf(spotHistoryArray[0]), 1);
 
 			// run one step -> IMPORTANT: rnnTimeStep() must be called, not
@@ -210,7 +211,7 @@ public class RnnPredictor extends BasePredictor {
 				System.out.print(",");
 
 				// use the last output as input
-				INDArray nextInput = Nd4j.zeros(availableSpotList.size());
+				INDArray nextInput = Nd4j.zeros(1, availableSpotList.size(), 1);
 				nextInput.putScalar(sampledCharacterIdx, 1);
 				output = net.rnnTimeStep(nextInput);
 

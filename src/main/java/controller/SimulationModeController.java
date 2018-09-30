@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import application.RouletteContext;
 import cell.SimulationModeStrategyCell;
 import enums.Spot;
@@ -12,11 +16,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.WindowEvent;
 import model.Bet;
 import strategy.BaseStrategy;
+import utils.LogHelper;
 import utils.StrategyHelper;
-
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * シミュレーションモード画面コントローラー.
@@ -122,7 +123,7 @@ public class SimulationModeController extends BaseController {
 							});
 
 							// debug
-							System.out.println("出目=" + nextSpot.name());
+							LogHelper.debug("出目=" + nextSpot.name());
 
 							return true;
 						}

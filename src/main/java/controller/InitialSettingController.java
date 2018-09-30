@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import utils.LogHelper;
 
 /**
  * 初期設定画面コントローラー.
@@ -147,14 +148,14 @@ public class InitialSettingController extends BaseController {
 		long maximumBet = Long.parseLong(maximumBetTextField.getText());
 
 		// 設定値を出力
-		System.out.println("ルーレットのタイプ=" + rouletteType.name());
-		System.out.println("初期所持金=" + initialBalance);
-		System.out.println("最小ベット額=" + minimumBet);
-		System.out.println("最大ベット額=" + maximumBet);
+		LogHelper.info("ルーレットのタイプ=" + rouletteType.name());
+		LogHelper.info("初期所持金=" + initialBalance);
+		LogHelper.info("最小ベット額=" + minimumBet);
+		LogHelper.info("最大ベット額=" + maximumBet);
 		if (runModeRadioButton1.isSelected()) {
-			System.out.println("実行モード=" + runModeRadioButton1.getText());
+			LogHelper.info("実行モード=" + runModeRadioButton1.getText());
 		} else if (runModeRadioButton2.isSelected()) {
-			System.out.println("実行モード=" + runModeRadioButton2.getText());
+			LogHelper.info("実行モード=" + runModeRadioButton2.getText());
 		}
 
 		// ルーレットのコンテキストを作成

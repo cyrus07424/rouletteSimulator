@@ -1,8 +1,9 @@
 package utils;
 
-import constants.Configurations;
-
 import java.io.File;
+
+import constants.Configurations;
+import play.Logger;
 
 /**
  * ファイルヘルパー.
@@ -21,7 +22,7 @@ public class FileHelper {
 		File file = new File(Configurations.SETTING_FILE_DIRECTORY, fileName);
 		if (!file.getParentFile().exists()) {
 			if (!file.getParentFile().mkdirs()) {
-				System.out.println("ディレクトリの作成に失敗しました。");
+				System.err.println("ディレクトリの作成に失敗しました。");
 			}
 		}
 		return file;

@@ -1,16 +1,17 @@
 package predictor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
 import model.BetTypePrediction;
 import model.SpotPrediction;
 import utils.BetHelper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import utils.LogHelper;
 
 /**
  * マルコフテーブルによる予測器.
@@ -162,12 +163,12 @@ public class MarkovPredictor extends BasePredictor {
 	 * データを出力.
 	 */
 	private void dumpMarkovMap() {
-		System.out.println("--- spotMarkovMap start ---");
+		LogHelper.debug("--- spotMarkovMap start ---");
 		for (Map.Entry<Spot, Map<Spot, Long>> entry1 : spotMarkovMap.entrySet()) {
 			for (Map.Entry<Spot, Long> entry2 : entry1.getValue().entrySet()) {
-				System.out.println(entry1.getKey().name() + "-" + entry2.getKey().name() + ":" + entry2.getValue());
+				LogHelper.debug(entry1.getKey().name() + "-" + entry2.getKey().name() + ":" + entry2.getValue());
 			}
 		}
-		System.out.println("--- spotMarkovMap end ---");
+		LogHelper.debug("--- spotMarkovMap end ---");
 	}
 }
