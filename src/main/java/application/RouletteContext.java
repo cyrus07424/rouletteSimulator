@@ -1,13 +1,13 @@
 package application;
 
+import java.util.LinkedList;
+
 import constants.Configurations;
 import enums.RouletteType;
 import enums.Spot;
 
-import java.util.LinkedList;
-
 /**
- * ルーレットのコンテキスト. TODO シングルトンにする?
+ * ルーレットのコンテキスト.
  *
  * @author
  */

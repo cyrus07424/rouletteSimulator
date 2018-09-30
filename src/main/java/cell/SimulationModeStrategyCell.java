@@ -1,5 +1,8 @@
 package cell;
 
+import java.io.IOException;
+import java.text.NumberFormat;
+
 import application.RouletteContext;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,9 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
 import strategy.BaseStrategy;
-
-import java.io.IOException;
-import java.text.NumberFormat;
 
 /**
  * シミュレーションモード画面の戦略のセル.
@@ -157,6 +157,13 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 			wholeTotalPayoutLabel.setText(NUMBER_FORMAT.format(strategy.wholeTotalPayoutValue));
 			averageTotalPayoutLabel.setText(NUMBER_FORMAT.format(strategy.getAverageTotalPayoutValue()));
 			winningAverageLabel.setText(String.format("%.2f%%", strategy.getWinningAverage() * 100));
+
+			// 背景色を設定
+			if (strategy.isLive()) {
+				cellContainer.setStyle("");
+			} else {
+				cellContainer.setStyle("-fx-background-color: lightgray;");
+			}
 			setGraphic(cellContainer);
 		}
 	}

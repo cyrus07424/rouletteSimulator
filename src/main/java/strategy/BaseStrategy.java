@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+
 import application.RouletteContext;
 import constants.Configurations;
 import enums.Spot;
 import model.Bet;
 import utils.BetHelper;
-
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * 戦略のベースクラス.
@@ -94,8 +95,13 @@ public abstract class BaseStrategy {
 	 * @param rouletteContext
 	 */
 	public List<Bet> getNextBetList(RouletteContext rouletteContext) {
-		// 次のベット一覧を取得
-		lastBetList = getNextBetListImpl(rouletteContext);
+		if (isLive()) {
+			// 次のベット一覧を取得
+			lastBetList = getNextBetListImpl(rouletteContext);
+		} else {
+			// ベットなし
+			lastBetList = Collections.emptyList();
+		}
 
 		// ベット総額の最大値を更新
 		long totalBetValue = BetHelper.getTotalBetValue(lastBetList);
@@ -165,6 +171,16 @@ public abstract class BaseStrategy {
 		if (Configurations.BALANCE_HISTORY_SIZE < balanceHistoryList.size()) {
 			balanceHistoryList.poll();
 		}
+	}
+
+	/**
+	 * 有効な戦略(脱落していない)かどうかを取得.<br>
+	 * 所持金が0以下になった場合脱落.
+	 *
+	 * @return
+	 */
+	public boolean isLive() {
+		return 0 < currentBalance;
 	}
 
 	/**
