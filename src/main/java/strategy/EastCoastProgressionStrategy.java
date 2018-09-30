@@ -1,14 +1,14 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
- * イーストコーストプログレッション(赤のみ).
+ * イーストコーストプログレッション(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/east_coast.php
  *
  * @author

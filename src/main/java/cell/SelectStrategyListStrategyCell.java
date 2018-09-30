@@ -1,5 +1,7 @@
 package cell;
 
+import java.io.IOException;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,8 +15,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import strategy.BaseStrategy;
-
-import java.io.IOException;
 
 /**
  * 戦略選択画面の戦略のセル.

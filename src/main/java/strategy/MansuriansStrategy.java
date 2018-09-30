@@ -1,13 +1,14 @@
 package strategy;
 
-import application.RouletteContext;
-import model.Bet;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import application.RouletteContext;
+import model.Bet;
+
 /**
- * マンシュリアン法. https://casino-kingdom.com/mansurians/
+ * マンシュリアン法.<br>
+ * https://casino-kingdom.com/mansurians/
  *
  * @author
  */

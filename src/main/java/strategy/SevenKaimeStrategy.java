@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * 7回目の法則(赤のみ). http://www.xn--9ckk7he3f9633bhel9uq.jp/seventh_time-law.html
+ * 7回目の法則(赤のみ).<br>
+ * http://www.xn--9ckk7he3f9633bhel9uq.jp/seventh_time-law.html
  *
  * @author
  */

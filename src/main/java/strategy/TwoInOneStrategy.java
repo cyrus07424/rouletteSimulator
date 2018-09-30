@@ -1,15 +1,16 @@
 package strategy;
 
-import application.RouletteContext;
-import enums.BetType;
-import model.Bet;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import application.RouletteContext;
+import enums.BetType;
+import model.Bet;
+
 /**
- * 2in1法(赤のみ). http://www.silversandscasino.jp/strategy/2in1.php
+ * 2in1法(赤のみ).<br>
+ * http://www.silversandscasino.jp/strategy/2in1.php
  *
  * @author
  */

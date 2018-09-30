@@ -1,10 +1,10 @@
 package enums;
 
-import application.RouletteContext;
-import constants.Configurations;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import application.RouletteContext;
+import constants.Configurations;
 
 /**
  * 出目.

@@ -1,16 +1,16 @@
 package predictor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
 import model.BetTypePrediction;
 import model.SpotPrediction;
 import utils.BetHelper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 出現回数による予測器.

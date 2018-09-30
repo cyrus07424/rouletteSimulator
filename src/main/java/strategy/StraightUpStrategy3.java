@@ -1,15 +1,16 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.Spot;
 import model.Bet;
 import utils.BetHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * ストレート複数賭け2. http://casino55.blog85.fc2.com/blog-entry-15.html
+ * ストレート複数賭け2.<br>
+ * http://casino55.blog85.fc2.com/blog-entry-15.html
  *
  * @author
  */

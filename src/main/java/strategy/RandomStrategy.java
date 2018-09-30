@@ -1,12 +1,12 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import constants.Configurations;
 import enums.BetType;
 import model.Bet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ランダム.

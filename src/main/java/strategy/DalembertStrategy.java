@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
- * ダランベール法(赤のみ). http://www.silversandscasino.jp/strategy/daremberg.php
+ * ダランベール法(赤のみ).<br>
+ * http://www.silversandscasino.jp/strategy/daremberg.php
  *
  * @author
  */

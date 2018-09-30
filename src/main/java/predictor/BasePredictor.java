@@ -1,10 +1,10 @@
 package predictor;
 
+import java.util.List;
+
 import application.RouletteContext;
 import model.BetTypePrediction;
 import model.SpotPrediction;
-
-import java.util.List;
 
 /**
  * 予測器のベースクラス.

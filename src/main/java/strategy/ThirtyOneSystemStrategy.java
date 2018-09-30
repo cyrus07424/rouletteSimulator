@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
- * 31システム(赤のみ). http://www.silversandscasino.jp/strategy/31system.php
+ * 31システム(赤のみ).<br>
+ * http://www.silversandscasino.jp/strategy/31system.php
  *
  * @author
  */

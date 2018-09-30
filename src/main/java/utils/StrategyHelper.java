@@ -1,12 +1,5 @@
 package utils;
 
-import application.RouletteContext;
-import com.google.common.reflect.ClassPath;
-import constants.Configurations;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import strategy.BaseStrategy;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +10,14 @@ import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.google.common.reflect.ClassPath;
+
+import application.RouletteContext;
+import constants.Configurations;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import strategy.BaseStrategy;
 
 /**
  * 戦略ヘルパー.

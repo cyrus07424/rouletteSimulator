@@ -1,5 +1,8 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
@@ -8,9 +11,6 @@ import model.SpotPrediction;
 import predictor.BasePredictor;
 import predictor.RnnPredictor;
 import utils.BetHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 1点賭け(予測器を使用).

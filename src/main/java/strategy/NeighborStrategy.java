@@ -1,17 +1,16 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.RouletteType;
 import enums.Spot;
 import model.Bet;
 import model.SpotPrediction;
 import predictor.BasePredictor;
-import predictor.CountPredictor2;
 import predictor.MarkovPredictor2;
 import utils.BetHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ネイバーベット法(予測器を使用).

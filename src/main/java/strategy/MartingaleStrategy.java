@@ -1,11 +1,11 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * マーチンゲール法(赤のみ).

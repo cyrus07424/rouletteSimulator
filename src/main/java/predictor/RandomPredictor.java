@@ -1,14 +1,14 @@
 package predictor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
 import model.BetTypePrediction;
 import model.SpotPrediction;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * ランダム予測器.

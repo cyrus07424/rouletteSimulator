@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * ココモ法(1stダズンのみ). http://www.silversandscasino.jp/strategy/cocomo.php
+ * ココモ法(1stダズンのみ).<br>
+ * http://www.silversandscasino.jp/strategy/cocomo.php
  *
  * @author
  */

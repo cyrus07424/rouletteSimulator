@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.Collections;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 import model.SpotPrediction;
-import predictor.*;
+import predictor.BasePredictor;
+import predictor.RnnPredictor;
 import utils.BetHelper;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * マーチンゲール法(予測器を使用).

@@ -1,15 +1,16 @@
 package strategy;
 
-import application.RouletteContext;
-import enums.BetType;
-import model.Bet;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import application.RouletteContext;
+import enums.BetType;
+import model.Bet;
+
 /**
- * モンテカルロ法(1stダズンのみ). http://www.silversandscasino.jp/strategy/montecarlo.php
+ * モンテカルロ法(1stダズンのみ).<br>
+ * http://www.silversandscasino.jp/strategy/montecarlo.php
  *
  * @author
  */

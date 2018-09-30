@@ -1,11 +1,11 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import enums.BetType;
 import enums.Spot;
 import model.Bet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ベットヘルパー.

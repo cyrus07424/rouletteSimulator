@@ -1,15 +1,16 @@
 package strategy;
 
-import application.RouletteContext;
-import enums.BetType;
-import model.Bet;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import application.RouletteContext;
+import enums.BetType;
+import model.Bet;
+
 /**
- * 10ユニット法(赤のみ). http://www.xn--9ckk7he3f9633bhel9uq.jp/10_units-law.html
+ * 10ユニット法(赤のみ).<br>
+ * http://www.xn--9ckk7he3f9633bhel9uq.jp/10_units-law.html
  *
  * @author
  */

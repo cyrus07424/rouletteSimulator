@@ -1,14 +1,15 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * 666法. https://casino-kingdom.com/666-strategy/
+ * 666法.<br>
+ * https://casino-kingdom.com/666-strategy/
  *
  * @author
  */

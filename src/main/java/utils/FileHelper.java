@@ -3,7 +3,6 @@ package utils;
 import java.io.File;
 
 import constants.Configurations;
-import play.Logger;
 
 /**
  * ファイルヘルパー.

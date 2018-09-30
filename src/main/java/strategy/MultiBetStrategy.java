@@ -1,13 +1,13 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import model.Bet;
 import model.BetTypePrediction;
 import predictor.BasePredictor;
 import predictor.MarkovPredictor2;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 複数賭け(予測器を使用).

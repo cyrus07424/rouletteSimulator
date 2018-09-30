@@ -1,15 +1,16 @@
 package strategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
 import model.Bet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * 98.48パーセント法. http://www.xn--9ckk7he3f9633bhel9uq.jp/9848_percent.html
+ * 98.48パーセント法.<br>
+ * http://www.xn--9ckk7he3f9633bhel9uq.jp/9848_percent.html
  *
  * @author
  */
