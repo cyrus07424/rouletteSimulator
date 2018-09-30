@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import akka.Main;
 import application.RouletteContext;
 import constants.Configurations;
 import enums.RouletteType;
@@ -96,10 +97,10 @@ public class InitialSettingController extends BaseController {
 		// このアプリについて
 		aboutMenuItem.setOnAction(event -> {
 			// アラートを表示
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("ルーレットシミュレーター");
-			alert.setHeaderText("見出");
-			alert.setContentText("製作者 cyrus");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("ルーレットシミュレーター " + Main.class.getPackage().getImplementationVersion());
+			alert.setHeaderText("Roulette Simulator");
+			alert.setContentText("Copyright (c) 2018 cyrus");
 			alert.show();
 		});
 

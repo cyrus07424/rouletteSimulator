@@ -9,6 +9,7 @@ import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
 import model.BetTypePrediction;
+import model.ColorPrediction;
 import model.SpotPrediction;
 import utils.BetHelper;
 
@@ -18,11 +19,6 @@ import utils.BetHelper;
  * @author
  */
 public class CountPredictor extends BasePredictor {
-
-	/**
-	 * シングルトンのインスタンス.
-	 */
-	private static CountPredictor instance;
 
 	/**
 	 * 出目毎の出現回数.
@@ -38,18 +34,6 @@ public class CountPredictor extends BasePredictor {
 	 * 総試行回数.
 	 */
 	private long totalCount = 0;
-
-	/**
-	 * インスタンスを取得.
-	 *
-	 * @return
-	 */
-	public static CountPredictor getInstance() {
-		if (instance == null) {
-			instance = new CountPredictor();
-		}
-		return instance;
-	}
 
 	@Override
 	public List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext) {
@@ -85,6 +69,29 @@ public class CountPredictor extends BasePredictor {
 			}
 		}
 		return betTypePredictionList;
+	}
+
+	@Override
+	public ColorPrediction getNextColorPrediction(RouletteContext rouletteContext) {
+		// 色毎の出現回数をカウント
+		double redCount = 0;
+		double blackCount = 0;
+		double greenCount = 0;
+		for (Spot spot : Spot.getAvailableList(rouletteContext.rouletteType)) {
+			if (spotCountMap.containsKey(spot)) {
+				if (spot.isRed()) {
+					redCount += spotCountMap.get(spot);
+				} else if (spot.isBlack()) {
+					blackCount += spotCountMap.get(spot);
+				} else if (spot.isGreen()) {
+					greenCount += spotCountMap.get(spot);
+				}
+			}
+		}
+		double totalCount = redCount + blackCount + greenCount;
+
+		// 出現の割合を設定
+		return new ColorPrediction(redCount / totalCount, blackCount / totalCount, greenCount / totalCount);
 	}
 
 	/**

@@ -122,8 +122,9 @@ public class SimulationModeController extends BaseController {
 								blackRateLabel.setText(String.format("%.2f%%", rouletteContext.getBlackRate() * 100));
 							});
 
-							// debug
-							LogHelper.debug("出目=" + nextSpot.name());
+							// コンソールに情報を表示
+							LogHelper.info(
+									String.format("試行回数=%d, 出目=%s", rouletteContext.currentLoopCount, nextSpot.name()));
 
 							return true;
 						}

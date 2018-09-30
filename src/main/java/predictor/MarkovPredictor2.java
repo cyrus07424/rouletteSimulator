@@ -19,23 +19,6 @@ import utils.BetHelper;
  */
 public class MarkovPredictor2 extends BasePredictor {
 
-	/**
-	 * シングルトンのインスタンス.
-	 */
-	private static MarkovPredictor2 instance;
-
-	/**
-	 * インスタンスを取得.
-	 *
-	 * @return
-	 */
-	public static MarkovPredictor2 getInstance() {
-		if (instance == null) {
-			instance = new MarkovPredictor2();
-		}
-		return instance;
-	}
-
 	@Override
 	public List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext) {
 		List<SpotPrediction> spotPredictionList = new ArrayList<>();

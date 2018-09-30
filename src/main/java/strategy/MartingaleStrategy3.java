@@ -6,10 +6,11 @@ import java.util.List;
 import application.RouletteContext;
 import enums.BetType;
 import model.Bet;
-import model.SpotPrediction;
+import model.ColorPrediction;
 import predictor.BasePredictor;
-import predictor.RnnPredictor;
+import predictor.CountPredictor2;
 import utils.BetHelper;
+import utils.PredictorHelper;
 
 /**
  * マーチンゲール法(予測器を使用).
@@ -21,7 +22,7 @@ public class MartingaleStrategy3 extends BaseStrategy {
 	/**
 	 * 使用する予測器.
 	 */
-	private static final BasePredictor PREDICTOR = RnnPredictor.getInstance();
+	private static final BasePredictor PREDICTOR = PredictorHelper.getInstance(CountPredictor2.class);
 
 	/**
 	 * コンストラクタ.
@@ -39,21 +40,12 @@ public class MartingaleStrategy3 extends BaseStrategy {
 
 	@Override
 	public List<Bet> getNextBetListImpl(RouletteContext rouletteContext) {
-		// 赤と黒の確率の合計を取得
-		double redProbability = 0;
-		double blackProbability = 0;
-		// 予測一覧に対して実行
-		for (SpotPrediction spotPrediction : PREDICTOR.getNextSpotPredictionList(rouletteContext)) {
-			if (spotPrediction.spot.isRed()) {
-				redProbability += spotPrediction.probability;
-			} else if (spotPrediction.spot.isBlack()) {
-				blackProbability += spotPrediction.probability;
-			}
-		}
+		// 次の出目の色の予測を取得
+		ColorPrediction colorPrediction = PREDICTOR.getNextColorPrediction(rouletteContext);
 
 		// 使用するベットの種類を選択
 		BetType useBetType;
-		if (blackProbability <= redProbability) {
+		if (colorPrediction.blackProbability <= colorPrediction.redProbability) {
 			useBetType = BetType.RED;
 		} else {
 			useBetType = BetType.BLACK;

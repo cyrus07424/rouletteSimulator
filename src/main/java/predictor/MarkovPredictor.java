@@ -21,11 +21,6 @@ import utils.LogHelper;
 public class MarkovPredictor extends BasePredictor {
 
 	/**
-	 * シングルトンのインスタンス.
-	 */
-	private static MarkovPredictor instance;
-
-	/**
 	 * 直近2回の出目毎の出現回数.
 	 */
 	private Map<Spot, Map<Spot, Long>> spotMarkovMap = new HashMap<>();
@@ -39,18 +34,6 @@ public class MarkovPredictor extends BasePredictor {
 	 * 総試行回数.
 	 */
 	private long totalCount = 0;
-
-	/**
-	 * インスタンスを取得.
-	 *
-	 * @return
-	 */
-	public static MarkovPredictor getInstance() {
-		if (instance == null) {
-			instance = new MarkovPredictor();
-		}
-		return instance;
-	}
 
 	@Override
 	public List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext) {

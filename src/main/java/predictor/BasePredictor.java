@@ -1,9 +1,11 @@
 package predictor;
 
+import java.util.Collections;
 import java.util.List;
 
 import application.RouletteContext;
 import model.BetTypePrediction;
+import model.ColorPrediction;
 import model.SpotPrediction;
 
 /**
@@ -19,7 +21,9 @@ public abstract class BasePredictor {
 	 * @param rouletteContext
 	 * @return
 	 */
-	public abstract List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext);
+	public List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext) {
+		return Collections.emptyList();
+	}
 
 	/**
 	 * 次のベットの種類の予測一覧を取得.
@@ -27,5 +31,17 @@ public abstract class BasePredictor {
 	 * @param rouletteContext
 	 * @return
 	 */
-	public abstract List<BetTypePrediction> getNextBetTypePredictionList(RouletteContext rouletteContext);
+	public List<BetTypePrediction> getNextBetTypePredictionList(RouletteContext rouletteContext) {
+		return Collections.emptyList();
+	}
+
+	/**
+	 * 次の出目の色の予測を取得.
+	 *
+	 * @param rouletteContext
+	 * @return
+	 */
+	public ColorPrediction getNextColorPrediction(RouletteContext rouletteContext) {
+		return new ColorPrediction(0, 0, 0);
+	}
 }

@@ -21,7 +21,6 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 import application.RouletteContext;
 import constants.Configurations;
 import enums.Spot;
-import model.BetTypePrediction;
 import model.SpotPrediction;
 import utils.LogHelper;
 
@@ -33,11 +32,6 @@ import utils.LogHelper;
  */
 public class RnnPredictor extends BasePredictor {
 
-	/**
-	 * シングルトンのインスタンス.
-	 */
-	private static RnnPredictor instance;
-
 	// RNN dimensions
 	private static final int HIDDEN_LAYER_WIDTH = 50;
 
@@ -47,18 +41,6 @@ public class RnnPredictor extends BasePredictor {
 	 * 使用するネットワーク.
 	 */
 	private MultiLayerNetwork useNet;
-
-	/**
-	 * インスタンスを取得.
-	 *
-	 * @return
-	 */
-	public static RnnPredictor getInstance() {
-		if (instance == null) {
-			instance = new RnnPredictor();
-		}
-		return instance;
-	}
 
 	@Override
 	public List<SpotPrediction> getNextSpotPredictionList(RouletteContext rouletteContext) {
@@ -220,10 +202,5 @@ public class RnnPredictor extends BasePredictor {
 		}
 
 		return net;
-	}
-
-	@Override
-	public List<BetTypePrediction> getNextBetTypePredictionList(RouletteContext rouletteContext) {
-		return null;
 	}
 }

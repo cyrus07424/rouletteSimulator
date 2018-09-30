@@ -11,6 +11,7 @@ import model.SpotPrediction;
 import predictor.BasePredictor;
 import predictor.RnnPredictor;
 import utils.BetHelper;
+import utils.PredictorHelper;
 
 /**
  * フラワーベット(予測器を使用).
@@ -22,7 +23,7 @@ public class FlowerBetStrategy extends BaseStrategy {
 	/**
 	 * 使用する予測器.
 	 */
-	private static final BasePredictor PREDICTOR = RnnPredictor.getInstance();
+	private static final BasePredictor PREDICTOR = PredictorHelper.getInstance(RnnPredictor.class);
 
 	/**
 	 * コンストラクタ.

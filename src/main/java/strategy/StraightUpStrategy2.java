@@ -10,6 +10,7 @@ import model.SpotPrediction;
 import predictor.BasePredictor;
 import predictor.CountPredictor2;
 import utils.BetHelper;
+import utils.PredictorHelper;
 
 /**
  * ストレート複数賭け(予測器を使用).
@@ -21,7 +22,7 @@ public class StraightUpStrategy2 extends BaseStrategy {
 	/**
 	 * 使用する予測器.
 	 */
-	private static final BasePredictor PREDICTOR = CountPredictor2.getInstance();
+	private static final BasePredictor PREDICTOR = PredictorHelper.getInstance(CountPredictor2.class);
 
 	/**
 	 * コンストラクタ.

@@ -8,6 +8,7 @@ import model.Bet;
 import model.BetTypePrediction;
 import predictor.BasePredictor;
 import predictor.MarkovPredictor2;
+import utils.PredictorHelper;
 
 /**
  * 複数賭け(予測器を使用).
@@ -19,7 +20,7 @@ public class MultiBetStrategy extends BaseStrategy {
 	/**
 	 * 使用する予測器.
 	 */
-	private static final BasePredictor PREDICTOR = MarkovPredictor2.getInstance();
+	private static final BasePredictor PREDICTOR = PredictorHelper.getInstance(MarkovPredictor2.class);
 
 	/**
 	 * コンストラクタ.

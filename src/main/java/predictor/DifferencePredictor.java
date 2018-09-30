@@ -5,7 +5,6 @@ import java.util.List;
 
 import application.RouletteContext;
 import enums.Spot;
-import model.BetTypePrediction;
 import model.SpotPrediction;
 
 /**
@@ -41,10 +40,5 @@ public class DifferencePredictor extends BasePredictor {
 			}
 		}
 		return spotPredictionList;
-	}
-
-	@Override
-	public List<BetTypePrediction> getNextBetTypePredictionList(RouletteContext rouletteContext) {
-		return null;
 	}
 }

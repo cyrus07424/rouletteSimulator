@@ -11,6 +11,7 @@ import model.SpotPrediction;
 import predictor.BasePredictor;
 import predictor.MarkovPredictor2;
 import utils.BetHelper;
+import utils.PredictorHelper;
 
 /**
  * ネイバーベット法(予測器を使用).
@@ -22,7 +23,7 @@ public class NeighborStrategy extends BaseStrategy {
 	/**
 	 * 使用する予測器.
 	 */
-	private static final BasePredictor PREDICTOR = MarkovPredictor2.getInstance();
+	private static final BasePredictor PREDICTOR = PredictorHelper.getInstance(MarkovPredictor2.class);
 
 	/**
 	 * コンストラクタ.
