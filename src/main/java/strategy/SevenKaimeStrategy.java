@@ -11,7 +11,7 @@ import model.Bet;
  * 7回目の法則(赤のみ).<br>
  * http://www.xn--9ckk7he3f9633bhel9uq.jp/seventh_time-law.html
  *
- * @author
+ * @author cyrus
  */
 public class SevenKaimeStrategy extends BaseStrategy {
 

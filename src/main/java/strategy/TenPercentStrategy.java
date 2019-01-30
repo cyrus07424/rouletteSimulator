@@ -11,7 +11,7 @@ import model.Bet;
  * 10%法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/10percent.php
  *
- * @author
+ * @author cyrus
  */
 public class TenPercentStrategy extends BaseStrategy {
 

@@ -10,7 +10,7 @@ import model.Bet;
 /**
  * マーチンゲール法(赤・黒のうち確率の高い方).
  *
- * @author
+ * @author cyrus
  */
 public class MartingaleStrategy2 extends BaseStrategy {
 

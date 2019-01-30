@@ -7,7 +7,7 @@ import constants.Configurations;
 /**
  * ファイルヘルパー.
  *
- * @author
+ * @author cyrus
  */
 public class FileHelper {
 

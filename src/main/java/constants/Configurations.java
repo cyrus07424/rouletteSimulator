@@ -9,7 +9,7 @@ import enums.SpotGenerateType;
 /**
  * 環境設定.
  *
- * @author
+ * @author cyrus
  */
 public interface Configurations {
 

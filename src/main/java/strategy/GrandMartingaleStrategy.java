@@ -10,7 +10,7 @@ import model.Bet;
 /**
  * グランマーチンゲール法(赤のみ).
  *
- * @author
+ * @author cyrus
  */
 public class GrandMartingaleStrategy extends BaseStrategy {
 

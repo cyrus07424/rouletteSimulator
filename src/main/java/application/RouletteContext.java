@@ -9,7 +9,7 @@ import enums.Spot;
 /**
  * ルーレットのコンテキスト.
  *
- * @author
+ * @author cyrus
  */
 public class RouletteContext {
 

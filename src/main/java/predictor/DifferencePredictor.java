@@ -10,7 +10,7 @@ import model.SpotPrediction;
 /**
  * 差分予測器.
  *
- * @author
+ * @author cyrus
  */
 public class DifferencePredictor extends BasePredictor {
 

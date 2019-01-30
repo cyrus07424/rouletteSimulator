@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 /**
  * メイン.
  *
- * @author
+ * @author cyrus
  */
 public class Main extends Application {
 

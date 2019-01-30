@@ -11,7 +11,7 @@ import model.Bet;
  * 逆マーチンゲール法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/paley.php
  *
- * @author
+ * @author cyrus
  */
 public class ReverseMartingaleRedStrategy extends BaseStrategy {
 

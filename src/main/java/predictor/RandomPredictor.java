@@ -13,7 +13,7 @@ import model.SpotPrediction;
 /**
  * ランダム予測器.
  *
- * @author
+ * @author cyrus
  */
 public class RandomPredictor extends BasePredictor {
 

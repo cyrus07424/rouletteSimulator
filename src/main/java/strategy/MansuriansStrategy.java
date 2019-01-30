@@ -10,7 +10,7 @@ import model.Bet;
  * マンシュリアン法.<br>
  * https://casino-kingdom.com/mansurians/
  *
- * @author
+ * @author cyrus
  */
 public class MansuriansStrategy extends BaseStrategy {
 

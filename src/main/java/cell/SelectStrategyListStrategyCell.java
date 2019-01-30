@@ -19,7 +19,7 @@ import strategy.BaseStrategy;
 /**
  * 戦略選択画面の戦略のセル.
  *
- * @author
+ * @author cyrus
  */
 public class SelectStrategyListStrategyCell<T> extends ListCell<BaseStrategy> {
 

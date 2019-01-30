@@ -12,7 +12,7 @@ import model.Bet;
  * モンテカルロ法(1stダズンのみ).<br>
  * http://www.silversandscasino.jp/strategy/montecarlo.php
  *
- * @author
+ * @author cyrus
  */
 public class MonteCarloStrategy extends BaseStrategy {
 

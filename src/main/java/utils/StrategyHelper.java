@@ -22,7 +22,7 @@ import strategy.BaseStrategy;
 /**
  * 戦略ヘルパー.
  *
- * @author
+ * @author cyrus
  */
 public class StrategyHelper {
 

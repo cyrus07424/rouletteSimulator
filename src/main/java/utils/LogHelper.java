@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * ログヘルパー.
  *
- * @author
+ * @author cyrus
  */
 public class LogHelper {
 

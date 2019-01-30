@@ -13,7 +13,7 @@ import utils.PredictorHelper;
 /**
  * 複数賭け(予測器を使用).
  *
- * @author
+ * @author cyrus
  */
 public class MultiBetStrategy extends BaseStrategy {
 

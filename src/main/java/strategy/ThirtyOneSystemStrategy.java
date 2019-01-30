@@ -11,7 +11,7 @@ import model.Bet;
  * 31システム(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/31system.php
  *
- * @author
+ * @author cyrus
  */
 public class ThirtyOneSystemStrategy extends BaseStrategy {
 

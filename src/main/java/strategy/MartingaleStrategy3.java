@@ -15,7 +15,7 @@ import utils.PredictorHelper;
 /**
  * マーチンゲール法(予測器を使用).
  *
- * @author
+ * @author cyrus
  */
 public class MartingaleStrategy3 extends BaseStrategy {
 

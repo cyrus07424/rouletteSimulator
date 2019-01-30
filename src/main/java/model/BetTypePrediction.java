@@ -5,7 +5,7 @@ import enums.BetType;
 /**
  * ベットの種類の予測.
  *
- * @author
+ * @author cyrus
  */
 public class BetTypePrediction {
 

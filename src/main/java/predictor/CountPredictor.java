@@ -16,7 +16,7 @@ import utils.BetHelper;
 /**
  * 出現回数による予測器.
  *
- * @author
+ * @author cyrus
  */
 public class CountPredictor extends BasePredictor {
 

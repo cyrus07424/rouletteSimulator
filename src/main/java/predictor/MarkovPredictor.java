@@ -16,7 +16,7 @@ import utils.LogHelper;
 /**
  * マルコフテーブルによる予測器.
  *
- * @author
+ * @author cyrus
  */
 public class MarkovPredictor extends BasePredictor {
 

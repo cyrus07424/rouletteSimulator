@@ -14,7 +14,7 @@ import javafx.stage.WindowEvent;
 /**
  * コントローラーのベースクラス.
  *
- * @author
+ * @author cyrus
  */
 public abstract class BaseController implements Initializable {
 

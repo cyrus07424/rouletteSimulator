@@ -11,7 +11,7 @@ import model.Bet;
 /**
  * ランダム.
  *
- * @author
+ * @author cyrus
  */
 public class RandomStrategy extends BaseStrategy {
 

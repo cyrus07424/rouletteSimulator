@@ -12,7 +12,7 @@ import model.Bet;
  * 99.46パーセント法.<br>
  * http://www.xn--9ckk7he3f9633bhel9uq.jp/9848_percent.html
  *
- * @author
+ * @author cyrus
  */
 public class Rate_99_46_PercentStrategy extends BaseStrategy {
 

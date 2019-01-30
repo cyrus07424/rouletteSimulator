@@ -11,7 +11,7 @@ import model.Bet;
  * 666法.<br>
  * https://casino-kingdom.com/666-strategy/
  *
- * @author
+ * @author cyrus
  */
 public class TripleSixStrategy extends BaseStrategy {
 

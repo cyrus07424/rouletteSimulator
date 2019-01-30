@@ -3,7 +3,7 @@ package model;
 /**
  * 出目の色の予測.
  *
- * @author
+ * @author cyrus
  */
 public class ColorPrediction {
 

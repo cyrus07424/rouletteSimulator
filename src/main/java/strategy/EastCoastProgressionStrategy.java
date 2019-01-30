@@ -11,7 +11,7 @@ import model.Bet;
  * イーストコーストプログレッション(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/east_coast.php
  *
- * @author
+ * @author cyrus
  */
 public class EastCoastProgressionStrategy extends BaseStrategy {
 

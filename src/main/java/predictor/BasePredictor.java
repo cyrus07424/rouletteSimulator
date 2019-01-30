@@ -11,7 +11,7 @@ import model.SpotPrediction;
 /**
  * 予測器のベースクラス.
  *
- * @author
+ * @author cyrus
  */
 public abstract class BasePredictor {
 

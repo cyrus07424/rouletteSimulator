@@ -21,7 +21,7 @@ import utils.LogHelper;
 /**
  * 初期設定画面コントローラー.
  *
- * @author
+ * @author cyrus
  */
 public class InitialSettingController extends BaseController {
 

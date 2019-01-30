@@ -11,7 +11,7 @@ import model.Bet;
  * ココモ法(1stダズンのみ).<br>
  * http://www.silversandscasino.jp/strategy/cocomo.php
  *
- * @author
+ * @author cyrus
  */
 public class CocomoStrategy extends BaseStrategy {
 

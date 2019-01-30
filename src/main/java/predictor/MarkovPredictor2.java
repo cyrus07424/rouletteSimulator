@@ -15,7 +15,7 @@ import utils.BetHelper;
 /**
  * マルコフテーブルによる予測器(出目の履歴内のみ).
  *
- * @author
+ * @author cyrus
  */
 public class MarkovPredictor2 extends BasePredictor {
 

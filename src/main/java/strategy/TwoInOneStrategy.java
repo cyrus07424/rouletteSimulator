@@ -12,7 +12,7 @@ import model.Bet;
  * 2in1法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/2in1.php
  *
- * @author
+ * @author cyrus
  */
 public class TwoInOneStrategy extends BaseStrategy {
 

@@ -3,7 +3,7 @@ package enums;
 /**
  * 出目の生成方法.
  *
- * @author
+ * @author cyrus
  */
 public enum SpotGenerateType {
 

@@ -12,7 +12,7 @@ import model.Bet;
  * 10ユニット法(赤のみ).<br>
  * http://www.xn--9ckk7he3f9633bhel9uq.jp/10_units-law.html
  *
- * @author
+ * @author cyrus
  */
 public class TenUnitStrategy extends BaseStrategy {
 

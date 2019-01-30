@@ -5,7 +5,7 @@ import enums.BetType;
 /**
  * ベット.
  *
- * @author
+ * @author cyrus
  */
 public class Bet {
 

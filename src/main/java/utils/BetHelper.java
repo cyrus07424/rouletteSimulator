@@ -10,7 +10,7 @@ import model.Bet;
 /**
  * ベットヘルパー.
  *
- * @author
+ * @author cyrus
  */
 public class BetHelper {
 

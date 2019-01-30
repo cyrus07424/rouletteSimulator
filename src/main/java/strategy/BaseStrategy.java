@@ -14,7 +14,7 @@ import utils.BetHelper;
 /**
  * 戦略のベースクラス.
  *
- * @author
+ * @author cyrus
  */
 public abstract class BaseStrategy {
 

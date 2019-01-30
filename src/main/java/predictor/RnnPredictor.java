@@ -28,7 +28,7 @@ import utils.LogHelper;
  * Rnn予測器.
  * https://github.com/deeplearning4j/dl4j-examples/blob/master/dl4j-examples/src/main/java/org/deeplearning4j/examples/recurrent/basic/BasicRNNExample.java
  *
- * @author
+ * @author cyrus
  */
 public class RnnPredictor extends BasePredictor {
 

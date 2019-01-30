@@ -15,7 +15,7 @@ import strategy.BaseStrategy;
 /**
  * シミュレーションモード画面の戦略のセル.
  *
- * @author
+ * @author cyrus
  */
 public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 

@@ -8,7 +8,7 @@ import predictor.BasePredictor;
 /**
  * 予測器ヘルパー.
  *
- * @author
+ * @author cyrus
  */
 public class PredictorHelper {
 

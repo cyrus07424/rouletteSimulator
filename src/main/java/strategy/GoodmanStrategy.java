@@ -11,7 +11,7 @@ import model.Bet;
  * グッドマン法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/goodman.php
  *
- * @author
+ * @author cyrus
  */
 public class GoodmanStrategy extends BaseStrategy {
 

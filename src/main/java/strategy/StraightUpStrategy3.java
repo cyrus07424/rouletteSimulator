@@ -12,7 +12,7 @@ import utils.BetHelper;
  * ストレート複数賭け2.<br>
  * http://casino55.blog85.fc2.com/blog-entry-15.html
  *
- * @author
+ * @author cyrus
  */
 public class StraightUpStrategy3 extends BaseStrategy {
 

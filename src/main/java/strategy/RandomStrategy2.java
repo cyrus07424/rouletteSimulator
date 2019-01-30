@@ -12,7 +12,7 @@ import utils.BetHelper;
 /**
  * ランダム2.
  *
- * @author
+ * @author cyrus
  */
 public class RandomStrategy2 extends BaseStrategy {
 

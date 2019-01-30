@@ -16,7 +16,7 @@ import utils.PredictorHelper;
 /**
  * ネイバーベット法(予測器を使用).
  *
- * @author
+ * @author cyrus
  */
 public class NeighborStrategy extends BaseStrategy {
 

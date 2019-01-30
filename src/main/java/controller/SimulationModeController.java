@@ -22,7 +22,7 @@ import utils.StrategyHelper;
 /**
  * シミュレーションモード画面コントローラー.
  *
- * @author
+ * @author cyrus
  */
 public class SimulationModeController extends BaseController {
 

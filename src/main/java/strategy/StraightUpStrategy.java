@@ -16,7 +16,7 @@ import utils.PredictorHelper;
 /**
  * 1点賭け(予測器を使用).
  *
- * @author
+ * @author cyrus
  */
 public class StraightUpStrategy extends BaseStrategy {
 

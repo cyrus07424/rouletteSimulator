@@ -11,7 +11,7 @@ import model.Bet;
  * バーネット法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/barnet.php
  *
- * @author
+ * @author cyrus
  */
 public class BarnetStrategy extends BaseStrategy {
 

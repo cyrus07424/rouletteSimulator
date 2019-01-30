@@ -5,7 +5,7 @@ import enums.Spot;
 /**
  * 出目の予測.
  *
- * @author
+ * @author cyrus
  */
 public class SpotPrediction {
 

@@ -16,7 +16,7 @@ import utils.PredictorHelper;
 /**
  * フラワーベット(予測器を使用).
  *
- * @author
+ * @author cyrus
  */
 public class FlowerBetStrategy extends BaseStrategy {
 

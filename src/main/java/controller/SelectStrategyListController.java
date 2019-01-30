@@ -21,7 +21,7 @@ import utils.StrategyHelper;
 /**
  * 戦略選択画面コントローラー.
  *
- * @author
+ * @author cyrus
  */
 public class SelectStrategyListController extends BaseController {
 

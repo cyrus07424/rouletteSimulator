@@ -11,7 +11,7 @@ import model.Bet;
  * ダランベール法(赤のみ).<br>
  * http://www.silversandscasino.jp/strategy/daremberg.php
  *
- * @author
+ * @author cyrus
  */
 public class DalembertStrategy extends BaseStrategy {
 
