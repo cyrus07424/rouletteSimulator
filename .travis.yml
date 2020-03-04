@@ -3,3 +3,6 @@ jdk: openjdk8
 before_install:
   - sudo apt update
   - sudo apt install openjfx
+cache:
+  directories:
+    - $HOME/.m2
