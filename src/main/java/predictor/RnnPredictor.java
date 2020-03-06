@@ -69,7 +69,7 @@ public class RnnPredictor extends BasePredictor {
 				// first process the last output of the network to a concrete
 				// neuron, the neuron with the highest output has the highest
 				// chance to get chosen
-				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output), 1).getInt(0);
+				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
 
 				// print the chosen output
 				// System.out.print(availableSpotList.get(sampledCharacterIdx));
@@ -80,7 +80,7 @@ public class RnnPredictor extends BasePredictor {
 				output = useNet.rnnTimeStep(nextInput);
 			}
 
-			int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output), 1).getInt(0);
+			int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
 			LogHelper.info("次の予想:" + availableSpotList.get(sampledCharacterIdx));
 
 			// 予測を作成
@@ -130,10 +130,6 @@ public class RnnPredictor extends BasePredictor {
 		outputLayerBuilder.nOut(availableSpotList.size());
 		listBuilder.layer(HIDDEN_LAYER_CONT, outputLayerBuilder.build());
 
-		// finish builder
-		listBuilder.pretrain(false);
-		listBuilder.backprop(true);
-
 		// create network
 		MultiLayerConfiguration conf = listBuilder.build();
 		MultiLayerNetwork net = new MultiLayerNetwork(conf);
@@ -181,12 +177,12 @@ public class RnnPredictor extends BasePredictor {
 			INDArray output = net.rnnTimeStep(testInit);
 
 			// now the net should guess spotHistoryArray.length more characters
-			for (Spot dummy : spotHistoryArray) {
+			for (Spot ignored : spotHistoryArray) {
 
 				// first process the last output of the network to a concrete
 				// neuron, the neuron with the highest output has the highest
 				// chance to get chosen
-				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output), 1).getInt(0);
+				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
 
 				// print the chosen output
 				System.out.print(availableSpotList.get(sampledCharacterIdx));

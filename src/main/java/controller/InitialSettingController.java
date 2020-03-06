@@ -3,7 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import akka.Main;
+import application.Main;
 import application.RouletteContext;
 import constants.Configurations;
 import enums.RouletteType;

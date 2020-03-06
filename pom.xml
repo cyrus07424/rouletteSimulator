@@ -13,21 +13,19 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<dl4j.version>1.0.0-beta2</dl4j.version>
-		<nd4j.version>1.0.0-beta2</nd4j.version>
-		<nd4j.backend>nd4j-cuda-9.2-platform</nd4j.backend>
+		<nd4j.version>1.0.0-beta6</nd4j.version>
+		<dl4j.version>1.0.0-beta6</dl4j.version>
+		<!-- Change the nd4j.backend property to nd4j-cuda-9.2-platform,nd4j-cuda-10.0-platform,nd4j-cuda-10.1-platform
+			or nd4j-cuda-10.2-platform to use CUDA GPUs -->
+		<nd4j.backend>nd4j-native-platform</nd4j.backend>
+		<logback.version>1.1.7</logback.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.nd4j</groupId>
-				<artifactId>nd4j-cuda-8.0-platform</artifactId>
-				<version>${nd4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.nd4j</groupId>
-				<artifactId>nd4j-cuda-9.0-platform</artifactId>
+				<artifactId>nd4j-native-platform</artifactId>
 				<version>${nd4j.version}</version>
 			</dependency>
 			<dependency>
@@ -35,15 +33,35 @@
 				<artifactId>nd4j-cuda-9.2-platform</artifactId>
 				<version>${nd4j.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.nd4j</groupId>
+				<artifactId>nd4j-cuda-10.0-platform</artifactId>
+				<version>${nd4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.nd4j</groupId>
+				<artifactId>nd4j-cuda-10.1-platform</artifactId>
+				<version>${nd4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.nd4j</groupId>
+				<artifactId>nd4j-cuda-10.2-platform</artifactId>
+				<version>${nd4j.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- ND4J backend. You need one in every DL4J project. Normally define
+			artifactId as either nd4j-native-platform or nd4j-cuda-X.X-platform to use
+			CUDA GPUs (check parent pom for supported cuda versions) -->
 		<dependency>
 			<groupId>org.nd4j</groupId>
 			<artifactId>${nd4j.backend}</artifactId>
 			<version>${nd4j.version}</version>
 		</dependency>
+
+		<!-- Core DL4J functionality -->
 		<dependency>
 			<groupId>org.deeplearning4j</groupId>
 			<artifactId>deeplearning4j-core</artifactId>
@@ -51,34 +69,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>nd4j-native-platform</artifactId>
-			<version>${nd4j.version}</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>${nd4j.backend}</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-core</artifactId>
-			<version>${dl4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-ui_2.10</artifactId>
-			<version>${dl4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.30</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-cli</groupId>
-			<artifactId>commons-cli</artifactId>
-			<version>1.4</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>28.2-jre</version>
 		</dependency>
 	</dependencies>
-
 </project>
