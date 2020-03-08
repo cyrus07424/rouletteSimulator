@@ -18,7 +18,7 @@
 		<!-- Change the nd4j.backend property to nd4j-cuda-9.2-platform,nd4j-cuda-10.0-platform,nd4j-cuda-10.1-platform
 			or nd4j-cuda-10.2-platform to use CUDA GPUs -->
 		<nd4j.backend>nd4j-native-platform</nd4j.backend>
-		<logback.version>1.1.7</logback.version>
+		<logback.version>1.2.3</logback.version>
 	</properties>
 
 	<dependencyManagement>
