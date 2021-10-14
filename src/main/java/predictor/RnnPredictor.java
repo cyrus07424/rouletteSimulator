@@ -12,7 +12,7 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.ops.impl.indexaccum.IMax;
+import org.nd4j.linalg.api.ops.impl.indexaccum.custom.ArgMax;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.RmsProp;
@@ -26,7 +26,7 @@ import utils.LogHelper;
 
 /**
  * Rnn予測器.
- * https://github.com/deeplearning4j/dl4j-examples/blob/master/dl4j-examples/src/main/java/org/deeplearning4j/examples/recurrent/basic/BasicRNNExample.java
+ * https://github.com/eclipse/deeplearning4j-examples/blob/master/dl4j-examples/src/main/java/org/deeplearning4j/examples/quickstart/modeling/recurrent/MemorizeSequence.java
  *
  * @author cyrus
  */
@@ -69,7 +69,7 @@ public class RnnPredictor extends BasePredictor {
 				// first process the last output of the network to a concrete
 				// neuron, the neuron with the highest output has the highest
 				// chance to get chosen
-				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
+				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new ArgMax(output, 1))[0].getInt(0);
 
 				// print the chosen output
 				// System.out.print(availableSpotList.get(sampledCharacterIdx));
@@ -80,7 +80,7 @@ public class RnnPredictor extends BasePredictor {
 				output = useNet.rnnTimeStep(nextInput);
 			}
 
-			int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
+			int sampledCharacterIdx = Nd4j.getExecutioner().exec(new ArgMax(output, 1))[0].getInt(0);
 			LogHelper.info("次の予想:" + availableSpotList.get(sampledCharacterIdx));
 
 			// 予測を作成
@@ -182,7 +182,7 @@ public class RnnPredictor extends BasePredictor {
 				// first process the last output of the network to a concrete
 				// neuron, the neuron with the highest output has the highest
 				// chance to get chosen
-				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new IMax(output, 1)).getInt(0);
+				int sampledCharacterIdx = Nd4j.getExecutioner().exec(new ArgMax(output, 1))[0].getInt(0);
 
 				// print the chosen output
 				System.out.print(availableSpotList.get(sampledCharacterIdx));
