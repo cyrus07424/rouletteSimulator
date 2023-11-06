@@ -3,6 +3,8 @@ package strategy;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import application.RouletteContext;
 import enums.BetType;
 import enums.Spot;
@@ -45,7 +47,7 @@ public class Rate_98_48_PercentStrategy extends BaseStrategy {
 				long useBet = rouletteContext.minimumBet;
 
 				// 前回ベットしている場合は前回ベットの倍額を賭ける
-				if (lastBetList != null && !lastBetList.isEmpty()) {
+				if (CollectionUtils.isNotEmpty(lastBetList)) {
 					useBet = lastBetList.get(0).value * 2;
 				}
 				betList.add(new Bet(BetType.SECOND_DOZEN, useBet));

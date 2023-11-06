@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import application.RouletteContext;
 import constants.Configurations;
 import enums.Spot;
@@ -236,7 +238,7 @@ public abstract class BaseStrategy {
 	 * @return
 	 */
 	protected boolean hasLastBet() {
-		return lastBetList != null && !lastBetList.isEmpty();
+		return CollectionUtils.isNotEmpty(lastBetList);
 	}
 
 	/**
