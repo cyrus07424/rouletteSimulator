@@ -515,4 +515,100 @@ public enum Spot {
 	public boolean is19To36() {
 		return 19 <= getNumber() && getNumber() <= 36;
 	}
+
+	/**
+	 * ヨーロピアンルーレットのホイール配置.
+	 */
+	private static final Spot[] EUROPEAN_WHEEL = {
+		SPOT_0, SPOT_32, SPOT_15, SPOT_19, SPOT_04, SPOT_21, SPOT_02, SPOT_25,
+		SPOT_17, SPOT_34, SPOT_06, SPOT_27, SPOT_13, SPOT_36, SPOT_11, SPOT_30, SPOT_08,
+		SPOT_23, SPOT_10, SPOT_05, SPOT_24, SPOT_16, SPOT_33, SPOT_01, SPOT_20, SPOT_14,
+		SPOT_31, SPOT_09, SPOT_22, SPOT_18, SPOT_29, SPOT_07, SPOT_28, SPOT_12, SPOT_35,
+		SPOT_03, SPOT_26
+	};
+
+	/**
+	 * アメリカンルーレットのホイール配置.
+	 */
+	private static final Spot[] AMERICAN_WHEEL = {
+		SPOT_0, SPOT_28, SPOT_09, SPOT_26, SPOT_30, SPOT_11, SPOT_07, SPOT_20, SPOT_32, SPOT_17,
+		SPOT_05, SPOT_22, SPOT_34, SPOT_15, SPOT_03, SPOT_24, SPOT_36, SPOT_13, SPOT_01, SPOT_00,
+		SPOT_27, SPOT_10, SPOT_25, SPOT_29, SPOT_12, SPOT_08, SPOT_19, SPOT_31, SPOT_18, SPOT_06,
+		SPOT_21, SPOT_33, SPOT_16, SPOT_04, SPOT_23, SPOT_35, SPOT_14, SPOT_02
+	};
+
+	/**
+	 * 1-36ルーレットのホイール配置(0と00を除く).
+	 */
+	private static final Spot[] ONE_TO_36_WHEEL = {
+		SPOT_32, SPOT_15, SPOT_19, SPOT_04, SPOT_21, SPOT_02, SPOT_25,
+		SPOT_17, SPOT_34, SPOT_06, SPOT_27, SPOT_13, SPOT_36, SPOT_11, SPOT_30, SPOT_08,
+		SPOT_23, SPOT_10, SPOT_05, SPOT_24, SPOT_16, SPOT_33, SPOT_01, SPOT_20, SPOT_14,
+		SPOT_31, SPOT_09, SPOT_22, SPOT_18, SPOT_29, SPOT_07, SPOT_28, SPOT_12, SPOT_35,
+		SPOT_03, SPOT_26
+	};
+
+	/**
+	 * ルーレットの種類に応じたホイール配置を取得.
+	 *
+	 * @param rouletteType ルーレットの種類
+	 * @return ホイール配置
+	 */
+	private static Spot[] getWheelLayout(RouletteType rouletteType) {
+		switch (rouletteType) {
+			case EUROPEAN_STYLE:
+				return EUROPEAN_WHEEL;
+			case AMERICAN_STYLE:
+				return AMERICAN_WHEEL;
+			case ONE_TO_36:
+				return ONE_TO_36_WHEEL;
+			default:
+				throw new IllegalArgumentException("Unsupported roulette type: " + rouletteType);
+		}
+	}
+
+	/**
+	 * ホイール上での位置を取得.
+	 *
+	 * @param rouletteType ルーレットの種類
+	 * @return ホイール上での位置（見つからない場合は-1）
+	 */
+	public int getWheelPosition(RouletteType rouletteType) {
+		Spot[] wheelLayout = getWheelLayout(rouletteType);
+		for (int i = 0; i < wheelLayout.length; i++) {
+			if (wheelLayout[i] == this) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * 前回の出目との、盤上での物理的な距離を取得.
+	 *
+	 * @param otherSpot 比較対象の出目
+	 * @param rouletteType ルーレットの種類
+	 * @return 物理的な距離（ホイール上での最短距離）
+	 */
+	public int getPhysicalDistance(Spot otherSpot, RouletteType rouletteType) {
+		if (otherSpot == null) {
+			throw new IllegalArgumentException("otherSpot cannot be null");
+		}
+
+		int thisPosition = this.getWheelPosition(rouletteType);
+		int otherPosition = otherSpot.getWheelPosition(rouletteType);
+
+		if (thisPosition == -1 || otherPosition == -1) {
+			throw new IllegalArgumentException("One or both spots are not available in the specified roulette type");
+		}
+
+		Spot[] wheelLayout = getWheelLayout(rouletteType);
+		int wheelSize = wheelLayout.length;
+
+		// 円周上での最短距離を計算
+		int clockwiseDistance = Math.abs(thisPosition - otherPosition);
+		int counterClockwiseDistance = wheelSize - clockwiseDistance;
+
+		return Math.min(clockwiseDistance, counterClockwiseDistance);
+	}
 }
