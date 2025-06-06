@@ -13,11 +13,13 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.WindowEvent;
 import model.Bet;
 import strategy.BaseStrategy;
 import utils.LogHelper;
 import utils.StrategyHelper;
+import view.SpotHeatmapView;
 
 /**
  * シミュレーションモード画面コントローラー.
@@ -56,6 +58,17 @@ public class SimulationModeController extends BaseController {
 	private ListView<BaseStrategy> strategyListView;
 
 	/**
+	 * ヒートマップ用スクロールペイン.
+	 */
+	@FXML
+	private ScrollPane heatmapScrollPane;
+
+	/**
+	 * 出目ヒートマップビュー.
+	 */
+	private SpotHeatmapView spotHeatmapView;
+
+	/**
 	 * メインループを行うサービス.
 	 */
 	private ScheduledService<Boolean> mainLoopService;
@@ -72,6 +85,10 @@ public class SimulationModeController extends BaseController {
 	public void initialize(URL location, ResourceBundle resources) {
 		// 初期化完了後に実行
 		Platform.runLater(() -> {
+			// ヒートマップビューを初期化
+			spotHeatmapView = new SpotHeatmapView(rouletteContext);
+			heatmapScrollPane.setContent(spotHeatmapView);
+			
 			// リストビューを初期化
 			strategyListView.setCellFactory(listView -> new SimulationModeStrategyCell(rouletteContext));
 			strategyListView.setItems(
@@ -120,6 +137,11 @@ public class SimulationModeController extends BaseController {
 								redRateLabel.setText(String.format("%.2f%%", rouletteContext.getRedRate() * 100));
 								greenRateLabel.setText(String.format("%.2f%%", rouletteContext.getGreenRate() * 100));
 								blackRateLabel.setText(String.format("%.2f%%", rouletteContext.getBlackRate() * 100));
+								
+								// ヒートマップを更新
+								if (spotHeatmapView != null) {
+									spotHeatmapView.updateHeatmap();
+								}
 							});
 
 							// コンソールに情報を表示
@@ -142,5 +164,14 @@ public class SimulationModeController extends BaseController {
 	 */
 	public void setRouletteContext(RouletteContext rouletteContext) {
 		this.rouletteContext = rouletteContext;
+	}
+
+	/**
+	 * 出目ヒートマップビューを取得.
+	 *
+	 * @return 出目ヒートマップビュー
+	 */
+	public SpotHeatmapView getSpotHeatmapView() {
+		return spotHeatmapView;
 	}
 }

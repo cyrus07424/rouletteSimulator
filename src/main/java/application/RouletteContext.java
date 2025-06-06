@@ -136,4 +136,33 @@ public class RouletteContext {
 			return ((double) greenCount) / ((double) spotHistoryList.size());
 		}
 	}
+
+	/**
+	 * 各出目の出現回数を取得.
+	 *
+	 * @return 出目と出現回数のマップ
+	 */
+	public java.util.Map<Spot, Integer> getSpotFrequency() {
+		java.util.Map<Spot, Integer> frequencyMap = new java.util.HashMap<>();
+		for (Spot spot : spotHistoryList) {
+			frequencyMap.put(spot, frequencyMap.getOrDefault(spot, 0) + 1);
+		}
+		return frequencyMap;
+	}
+
+	/**
+	 * 指定した出目の出現回数を取得.
+	 *
+	 * @param spot 出目
+	 * @return 出現回数
+	 */
+	public int getSpotCount(Spot spot) {
+		int count = 0;
+		for (Spot s : spotHistoryList) {
+			if (s == spot) {
+				count++;
+			}
+		}
+		return count;
+	}
 }
