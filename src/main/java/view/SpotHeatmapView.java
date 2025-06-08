@@ -62,9 +62,9 @@ public class SpotHeatmapView extends GridPane {
 		try {
 			int numSpots = wheelLayout.length;
 
-			// 円の半径を計算（スポット数に基づく）
-			double radius = Math.max(4, numSpots / (2 * Math.PI));
-			int gridSize = (int) (radius * 2 + 4); // マージンを追加
+			// 円の半径を計算（スポット数に基づく、隣接スポットの重複を防ぐために十分な間隔を確保）
+			double radius = Math.max(6, numSpots / Math.PI); // より大きな半径を使用
+			int gridSize = (int) (radius * 2 + 6); // より大きなマージンを追加
 
 			spotLabels = new Label[gridSize][gridSize];
 
@@ -76,6 +76,9 @@ public class SpotHeatmapView extends GridPane {
 			double centerX = gridSize / 2.0;
 			double centerY = gridSize / 2.0;
 
+			// 配置済み位置を追跡してコリジョンを検出
+			boolean[][] occupied = new boolean[gridSize][gridSize];
+
 			// 各スポットを円形に配置
 			for (int i = 0; i < numSpots; i++) {
 				double angle = 2 * Math.PI * i / numSpots - Math.PI / 2; // -π/2で12時方向から開始
@@ -85,8 +88,15 @@ public class SpotHeatmapView extends GridPane {
 
 				// グリッド範囲内かチェック
 				if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+					// コリジョン（重複）をチェック
+					if (occupied[y][x]) {
+						// 重複が発生した場合は円形配置失敗
+						return false;
+					}
+					
 					Label label = createSpotLabel(wheelLayout[i]);
 					spotLabels[y][x] = label;
+					occupied[y][x] = true;
 					add(label, x, y);
 				} else {
 					// 範囲外の場合は円形配置失敗
