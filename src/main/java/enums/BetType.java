@@ -348,6 +348,8 @@ public enum BetType {
 				return new int[]{8, 5};
 			case SPLIT_14_15:
 				return new int[]{8, 3};
+			case SPLIT_15_16:
+				return new int[]{9, 4}; // 15と16の間 (対角線上の特殊分割)
 			case SPLIT_16_17:
 				return new int[]{10, 5};
 			case SPLIT_17_18:
@@ -457,7 +459,7 @@ public enum BetType {
 			
 			// Corner bets - 4つの数字の角のベット (奇数x,y座標で数字の交差点に配置)
 			case CORNER_0_1_2_3:
-				return new int[]{1, 5}; // 0,1,2,3の中心 (特別配置)
+				return new int[]{1, 4}; // 0,1,2,3の中心 (特別配置、0を含むため少し下)
 			case CORNER_1_2_4_5:
 				return new int[]{1, 5}; // 1,2,4,5の中心
 			case CORNER_2_3_5_6:
