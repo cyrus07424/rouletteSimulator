@@ -115,7 +115,7 @@
 	                    <Font name="System Bold" size="12.0" />
 	                </font>
 	            </Label>
-	            <ScrollPane fx:id="heatmapScrollPane" minWidth="300.0" prefWidth="500.0" fitToWidth="true" fitToHeight="true">
+	            <ScrollPane fx:id="heatmapScrollPane" minWidth="300.0" prefWidth="375.0" fitToWidth="true" fitToHeight="true">
 	                <VBox.margin>
 	                    <Insets />
 	                </VBox.margin>

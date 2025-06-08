@@ -4,6 +4,7 @@ import java.util.Map;
 
 import application.RouletteContext;
 import enums.HeatmapLayoutType;
+import enums.RouletteType;
 import enums.Spot;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -19,7 +20,7 @@ public class SpotHeatmapView extends GridPane {
 
 	private RouletteContext rouletteContext;
 	private Label[][] spotLabels;
-	
+
 	// Base style for spot labels to avoid memory leaks from style concatenation
 	private static final String BASE_SPOT_LABEL_STYLE = "-fx-alignment: center; -fx-border-color: gray; -fx-border-width: 1;";
 
@@ -78,19 +79,28 @@ public class SpotHeatmapView extends GridPane {
 
 			// 各スポットを円形に配置
 			for (int i = 0; i < numSpots; i++) {
+				Spot spot = wheelLayout[i];
 				double angle = 2 * Math.PI * i / numSpots - Math.PI / 2; // -π/2で12時方向から開始
 
 				int x = (int) Math.round(centerX + radius * Math.cos(angle));
 				int y = (int) Math.round(centerY + radius * Math.sin(angle));
 
-				// グリッド範囲内かチェック
-				if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+				// ヨーロピアンルーレットで0の場合
+				if (rouletteContext.rouletteType == RouletteType.EUROPEAN_STYLE && spot == Spot.SPOT_0) {
+					// FIXME 重ならないように例外的に配置
 					Label label = createSpotLabel(wheelLayout[i]);
-					spotLabels[y][x] = label;
-					add(label, x, y);
+					spotLabels[x][y + 1] = label;
+					add(label, x, y + 1);
 				} else {
-					// 範囲外の場合は円形配置失敗
-					return false;
+					// グリッド範囲内かチェック
+					if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+						Label label = createSpotLabel(wheelLayout[i]);
+						spotLabels[y][x] = label;
+						add(label, x, y);
+					} else {
+						// 範囲外の場合は円形配置失敗
+						return false;
+					}
 				}
 			}
 			return true;
@@ -283,8 +293,8 @@ public class SpotHeatmapView extends GridPane {
 	 */
 	private static Label createSpotLabel(Spot spot) {
 		Label label = new Label(getSpotDisplayText(spot));
-		label.setMinSize(35, 25);
-		label.setMaxSize(35, 25);
+		label.setMinSize(25, 25);
+		label.setMaxSize(25, 25);
 		label.setStyle(BASE_SPOT_LABEL_STYLE);
 		label.setFont(Font.font("System", FontWeight.BOLD, 9));
 
