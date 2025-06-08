@@ -63,14 +63,15 @@ public class RouletteContext {
 	 * @param minimumBet
 	 * @param maximumBet
 	 */
-	public RouletteContext(RouletteType rouletteType, HeatmapLayoutType heatmapLayoutType, long initialBalance, long minimumBet, long maximumBet) {
+	public RouletteContext(RouletteType rouletteType, HeatmapLayoutType heatmapLayoutType, long initialBalance,
+			long minimumBet, long maximumBet) {
 		this.rouletteType = rouletteType;
 		this.heatmapLayoutType = heatmapLayoutType;
 		this.initialBalance = initialBalance;
 		this.minimumBet = minimumBet;
 		this.maximumBet = maximumBet;
 		this.currentLoopCount = 0;
-		this.simulationSpeed = 1000; // デフォルト1秒
+		this.simulationSpeed = 100;
 	}
 
 	/**
