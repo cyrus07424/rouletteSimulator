@@ -495,12 +495,16 @@ public enum BetType {
 				return new int[]{9, 5}; // 13,14,16,17の中心
 			case CORNER_14_15_17_18:
 				return new int[]{9, 3}; // 14,15,17,18の中心
+			case CORNER_16_17_19_20:
+				return new int[]{11, 5}; // 16,17,19,20の中心
+			case CORNER_17_18_20_21:
+				return new int[]{11, 3}; // 17,18,20,21の中心
 			case CORNER_19_20_22_23:
 				return new int[]{13, 5}; // 19,20,22,23の中心
 			case CORNER_20_21_23_24:
 				return new int[]{13, 3}; // 20,21,23,24の中心
-			case CORNER_21_23_25_26:
-				return new int[]{15, 5}; // 21,23,25,26の中心（修正された配置）
+			case CORNER_22_23_25_26:
+				return new int[]{15, 5}; // 22,23,25,26の中心
 			case CORNER_23_24_26_27:
 				return new int[]{15, 3}; // 23,24,26,27の中心
 			case CORNER_25_26_28_29:
