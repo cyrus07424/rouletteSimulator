@@ -44,6 +44,11 @@ public class RouletteContext {
 	public long currentLoopCount;
 
 	/**
+	 * シミュレーション速度(ミリ秒単位のウェイト時間).
+	 */
+	public long simulationSpeed;
+
+	/**
 	 * コンストラクタ.
 	 *
 	 * @param rouletteType
@@ -57,6 +62,7 @@ public class RouletteContext {
 		this.minimumBet = minimumBet;
 		this.maximumBet = maximumBet;
 		this.currentLoopCount = 0;
+		this.simulationSpeed = 1000; // デフォルト1秒
 	}
 
 	/**
