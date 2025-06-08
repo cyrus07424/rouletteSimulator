@@ -43,6 +43,12 @@ public class SelectStrategyListController extends BaseController {
 	private Button okButton;
 
 	/**
+	 * キャンセルボタン.
+	 */
+	@FXML
+	private Button cancelButton;
+
+	/**
 	 * チェックボックスの状態を保持するマップ.
 	 */
 	private Map<String, SimpleBooleanProperty> onMap = new HashMap<>();
@@ -94,6 +100,12 @@ public class SelectStrategyListController extends BaseController {
 			StrategyHelper.saveEnableStrategyClassSet(enableStrategySet);
 
 			// 画面を閉じる
+			getThisStage().close();
+		});
+
+		// キャンセルボタンをクリックした時
+		cancelButton.setOnMouseClicked(event -> {
+			// 設定は保存せずに画面を閉じる
 			getThisStage().close();
 		});
 	}
