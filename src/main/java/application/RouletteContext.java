@@ -3,6 +3,7 @@ package application;
 import java.util.LinkedList;
 
 import constants.Configurations;
+import enums.HeatmapLayoutType;
 import enums.RouletteType;
 import enums.Spot;
 
@@ -17,6 +18,11 @@ public class RouletteContext {
 	 * ルーレットの種類.
 	 */
 	public final RouletteType rouletteType;
+
+	/**
+	 * ヒートマップレイアウトの種類.
+	 */
+	public final HeatmapLayoutType heatmapLayoutType;
 
 	/**
 	 * 出目の履歴(最後の要素が最新).
@@ -52,12 +58,14 @@ public class RouletteContext {
 	 * コンストラクタ.
 	 *
 	 * @param rouletteType
+	 * @param heatmapLayoutType
 	 * @param initialBalance
 	 * @param minimumBet
 	 * @param maximumBet
 	 */
-	public RouletteContext(RouletteType rouletteType, long initialBalance, long minimumBet, long maximumBet) {
+	public RouletteContext(RouletteType rouletteType, HeatmapLayoutType heatmapLayoutType, long initialBalance, long minimumBet, long maximumBet) {
 		this.rouletteType = rouletteType;
+		this.heatmapLayoutType = heatmapLayoutType;
 		this.initialBalance = initialBalance;
 		this.minimumBet = minimumBet;
 		this.maximumBet = maximumBet;
