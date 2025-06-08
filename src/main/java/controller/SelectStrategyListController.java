@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.stage.WindowEvent;
 import strategy.BaseStrategy;
@@ -35,6 +36,12 @@ public class SelectStrategyListController extends BaseController {
 	 */
 	@FXML
 	private ListView<BaseStrategy> strategyListView;
+
+	/**
+	 * 全て選択チェックボックス.
+	 */
+	@FXML
+	private CheckBox selectAllCheckBox;
 
 	/**
 	 * OKボタン.
@@ -81,6 +88,27 @@ public class SelectStrategyListController extends BaseController {
 
 			// 戦略一覧をソート
 			strategyListView.getItems().sort(BaseStrategy.getStrategyNameComparator());
+			
+			// 全て選択チェックボックスの初期状態を設定
+			updateSelectAllCheckBox();
+			
+			// 全て選択チェックボックスのリスナーを設定
+			selectAllCheckBox.setOnAction(event -> {
+				boolean selectAll = selectAllCheckBox.isSelected();
+				for (BaseStrategy strategy : strategyListView.getItems()) {
+					SimpleBooleanProperty property = onMap.get(strategy.getClass().getName());
+					if (property != null) {
+						property.setValue(selectAll);
+					}
+				}
+			});
+			
+			// 各戦略のチェックボックス状態変更時のリスナーを設定
+			for (SimpleBooleanProperty property : onMap.values()) {
+				property.addListener((observable, oldValue, newValue) -> {
+					updateSelectAllCheckBox();
+				});
+			}
 		});
 
 		// OKボタンをクリックした時
@@ -117,5 +145,26 @@ public class SelectStrategyListController extends BaseController {
 	 */
 	public void setRouletteContext(RouletteContext rouletteContext) {
 		this.rouletteContext = rouletteContext;
+	}
+
+	/**
+	 * 全て選択チェックボックスの状態を更新.
+	 */
+	private void updateSelectAllCheckBox() {
+		if (strategyListView.getItems() == null || strategyListView.getItems().isEmpty()) {
+			selectAllCheckBox.setSelected(false);
+			return;
+		}
+		
+		boolean allSelected = true;
+		for (BaseStrategy strategy : strategyListView.getItems()) {
+			SimpleBooleanProperty property = onMap.get(strategy.getClass().getName());
+			if (property == null || !property.getValue()) {
+				allSelected = false;
+				break;
+			}
+		}
+		
+		selectAllCheckBox.setSelected(allSelected);
 	}
 }
