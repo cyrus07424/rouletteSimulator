@@ -8,6 +8,7 @@ import application.RouletteContext;
 import constants.Configurations;
 import enums.HeatmapLayoutType;
 import enums.RouletteType;
+import enums.SpotGenerateType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -81,6 +82,27 @@ public class InitialSettingController extends BaseController {
 
 	@FXML
 	private RadioButton heatmapLayoutRadioButton2;
+
+	/**
+	 * 出目の生成方法.
+	 */
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton1;
+
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton2;
+
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton3;
+
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton4;
+
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton5;
+
+	@FXML
+	private RadioButton spotGenerateTypeRadioButton6;
 
 	/**
 	 * 戦略選択ボタン.
@@ -183,6 +205,22 @@ public class InitialSettingController extends BaseController {
 			heatmapLayoutType = HeatmapLayoutType.RECTANGULAR;
 		}
 		
+		// 出目の生成方法を取得
+		SpotGenerateType spotGenerateType = null;
+		if (spotGenerateTypeRadioButton1.isSelected()) {
+			spotGenerateType = SpotGenerateType.RANDOM;
+		} else if (spotGenerateTypeRadioButton2.isSelected()) {
+			spotGenerateType = SpotGenerateType.ROTATION_NUMBER;
+		} else if (spotGenerateTypeRadioButton3.isSelected()) {
+			spotGenerateType = SpotGenerateType.ROTATION_WHEEL;
+		} else if (spotGenerateTypeRadioButton4.isSelected()) {
+			spotGenerateType = SpotGenerateType.RANDOM_RED_ONLY;
+		} else if (spotGenerateTypeRadioButton5.isSelected()) {
+			spotGenerateType = SpotGenerateType.RANDOM_BLACK_ONLY;
+		} else if (spotGenerateTypeRadioButton6.isSelected()) {
+			spotGenerateType = SpotGenerateType.RANDOM_EXCEPT_ONE;
+		}
+		
 		long initialBalance = Long.parseLong(initialBalanceTextField.getText());
 		long minimumBet = Long.parseLong(minimumBetTextField.getText());
 		long maximumBet = Long.parseLong(maximumBetTextField.getText());
@@ -190,6 +228,7 @@ public class InitialSettingController extends BaseController {
 		// 設定値を出力
 		LogHelper.info("ルーレットのタイプ=" + rouletteType.name());
 		LogHelper.info("ヒートマップレイアウト=" + heatmapLayoutType.name());
+		LogHelper.info("出目の生成方法=" + spotGenerateType.name());
 		LogHelper.info("初期所持金=" + initialBalance);
 		LogHelper.info("最小ベット額=" + minimumBet);
 		LogHelper.info("最大ベット額=" + maximumBet);
@@ -200,7 +239,7 @@ public class InitialSettingController extends BaseController {
 		}
 
 		// ルーレットのコンテキストを作成
-		RouletteContext context = new RouletteContext(rouletteType, heatmapLayoutType, initialBalance, minimumBet, maximumBet);
+		RouletteContext context = new RouletteContext(rouletteType, heatmapLayoutType, spotGenerateType, initialBalance, minimumBet, maximumBet);
 		context.simulationSpeed = (long) simulationSpeedSlider.getValue();
 		return context;
 	}
