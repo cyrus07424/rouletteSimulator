@@ -87,7 +87,7 @@ public enum Spot {
 	 */
 	public static Spot getRandomNextSpot(RouletteContext rouletteContext) {
 		List<Spot> availableSpotList = getAvailableList(rouletteContext.rouletteType);
-		switch (Configurations.SPOT_GENERATE_TYPE) {
+		switch (rouletteContext.spotGenerateType) {
 		case RANDOM:
 			return availableSpotList.get(Configurations.RANDOM.nextInt(availableSpotList.size()));
 		case ROTATION_NUMBER:

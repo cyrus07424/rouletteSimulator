@@ -34,6 +34,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
                         <Label text="ルーレットのタイプ" GridPane.halignment="RIGHT">
@@ -95,12 +96,14 @@
                                 <RadioButton fx:id="heatmapLayoutRadioButton2" mnemonicParsing="false" text="四角形" toggleGroup="$heatmapLayout"/>
                             </children>
                         </HBox>
+                        <Label text="出目の生成方法" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
+                        <ComboBox fx:id="spotGenerateTypeComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                         <Label layoutX="10.0" layoutY="17.0" text="戦略" GridPane.halignment="RIGHT"
-                               GridPane.rowIndex="6"/>
+                               GridPane.rowIndex="7"/>
                         <Button fx:id="selectStrategyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                text="戦略選択" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                        <Label text="シミュレーション速度" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
-                        <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                text="戦略選択" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                        <Label text="シミュレーション速度" GridPane.halignment="RIGHT" GridPane.rowIndex="8"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                             <children>
                                 <Slider fx:id="simulationSpeedSlider" min="0" max="2000" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="500" minorTickCount="4" prefWidth="200.0"/>
                                 <Label fx:id="simulationSpeedLabel" text="100ms"/>

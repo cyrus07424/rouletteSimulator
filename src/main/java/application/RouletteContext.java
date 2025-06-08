@@ -6,6 +6,7 @@ import constants.Configurations;
 import enums.HeatmapLayoutType;
 import enums.RouletteType;
 import enums.Spot;
+import enums.SpotGenerateType;
 
 /**
  * ルーレットのコンテキスト.
@@ -23,6 +24,11 @@ public class RouletteContext {
 	 * ヒートマップレイアウトの種類.
 	 */
 	public final HeatmapLayoutType heatmapLayoutType;
+
+	/**
+	 * 出目の生成方法.
+	 */
+	public final SpotGenerateType spotGenerateType;
 
 	/**
 	 * 出目の履歴(最後の要素が最新).
@@ -59,14 +65,16 @@ public class RouletteContext {
 	 *
 	 * @param rouletteType
 	 * @param heatmapLayoutType
+	 * @param spotGenerateType
 	 * @param initialBalance
 	 * @param minimumBet
 	 * @param maximumBet
 	 */
-	public RouletteContext(RouletteType rouletteType, HeatmapLayoutType heatmapLayoutType, long initialBalance,
+	public RouletteContext(RouletteType rouletteType, HeatmapLayoutType heatmapLayoutType, SpotGenerateType spotGenerateType, long initialBalance,
 			long minimumBet, long maximumBet) {
 		this.rouletteType = rouletteType;
 		this.heatmapLayoutType = heatmapLayoutType;
+		this.spotGenerateType = spotGenerateType;
 		this.initialBalance = initialBalance;
 		this.minimumBet = minimumBet;
 		this.maximumBet = maximumBet;
