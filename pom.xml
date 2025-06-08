@@ -13,11 +13,23 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<logback.version>1.5.18</logback.version>
 		<dl4j-master.version>1.0.0-M1.1</dl4j-master.version>
 	</properties>
 
 	<dependencies>
+		<!-- JavaFX Controls (using JavaFX 11.0.2 - minimum external version) -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>11.0.2</version>
+		</dependency>
+		
+		<!-- JavaFX FXML -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>11.0.2</version>
+		</dependency>
 
 		<!-- deeplearning4j-core: contains main functionality and neural networks -->
 		<dependency>
@@ -47,12 +59,12 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
+			<version>1.2.12</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>33.4.8-jre</version>
+			<version>30.1.1-jre</version>
 		</dependency>
 	</dependencies>
 </project>
