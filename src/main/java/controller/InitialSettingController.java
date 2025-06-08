@@ -12,6 +12,7 @@ import enums.SpotGenerateType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
@@ -87,22 +88,7 @@ public class InitialSettingController extends BaseController {
 	 * 出目の生成方法.
 	 */
 	@FXML
-	private RadioButton spotGenerateTypeRadioButton1;
-
-	@FXML
-	private RadioButton spotGenerateTypeRadioButton2;
-
-	@FXML
-	private RadioButton spotGenerateTypeRadioButton3;
-
-	@FXML
-	private RadioButton spotGenerateTypeRadioButton4;
-
-	@FXML
-	private RadioButton spotGenerateTypeRadioButton5;
-
-	@FXML
-	private RadioButton spotGenerateTypeRadioButton6;
+	private ComboBox<String> spotGenerateTypeComboBox;
 
 	/**
 	 * 戦略選択ボタン.
@@ -139,6 +125,17 @@ public class InitialSettingController extends BaseController {
 		initialBalanceTextField.setText(String.valueOf(Configurations.DEFAULT_INITIAL_BALANCE));
 		minimumBetTextField.setText(String.valueOf(Configurations.DEFAULT_MINIMUM_BET));
 		maximumBetTextField.setText(String.valueOf(Configurations.DEFAULT_MAXIMUM_BET));
+
+		// 出目の生成方法のComboBoxを初期化
+		spotGenerateTypeComboBox.getItems().addAll(
+			"ランダム",
+			"数字の順番", 
+			"盤上での順番",
+			"ランダム(赤のみ)",
+			"ランダム(黒のみ)",
+			"ランダム(1以外)"
+		);
+		spotGenerateTypeComboBox.getSelectionModel().select("ランダム"); // デフォルト選択
 
 		// このアプリについて
 		aboutMenuItem.setOnAction(event -> {
@@ -206,19 +203,30 @@ public class InitialSettingController extends BaseController {
 		}
 		
 		// 出目の生成方法を取得
+		String selectedSpotGenerateType = spotGenerateTypeComboBox.getSelectionModel().getSelectedItem();
 		SpotGenerateType spotGenerateType = null;
-		if (spotGenerateTypeRadioButton1.isSelected()) {
-			spotGenerateType = SpotGenerateType.RANDOM;
-		} else if (spotGenerateTypeRadioButton2.isSelected()) {
-			spotGenerateType = SpotGenerateType.ROTATION_NUMBER;
-		} else if (spotGenerateTypeRadioButton3.isSelected()) {
-			spotGenerateType = SpotGenerateType.ROTATION_WHEEL;
-		} else if (spotGenerateTypeRadioButton4.isSelected()) {
-			spotGenerateType = SpotGenerateType.RANDOM_RED_ONLY;
-		} else if (spotGenerateTypeRadioButton5.isSelected()) {
-			spotGenerateType = SpotGenerateType.RANDOM_BLACK_ONLY;
-		} else if (spotGenerateTypeRadioButton6.isSelected()) {
-			spotGenerateType = SpotGenerateType.RANDOM_EXCEPT_ONE;
+		switch (selectedSpotGenerateType) {
+			case "ランダム":
+				spotGenerateType = SpotGenerateType.RANDOM;
+				break;
+			case "数字の順番":
+				spotGenerateType = SpotGenerateType.ROTATION_NUMBER;
+				break;
+			case "盤上での順番":
+				spotGenerateType = SpotGenerateType.ROTATION_WHEEL;
+				break;
+			case "ランダム(赤のみ)":
+				spotGenerateType = SpotGenerateType.RANDOM_RED_ONLY;
+				break;
+			case "ランダム(黒のみ)":
+				spotGenerateType = SpotGenerateType.RANDOM_BLACK_ONLY;
+				break;
+			case "ランダム(1以外)":
+				spotGenerateType = SpotGenerateType.RANDOM_EXCEPT_ONE;
+				break;
+			default:
+				spotGenerateType = SpotGenerateType.RANDOM; // フォールバック
+				break;
 		}
 		
 		long initialBalance = Long.parseLong(initialBalanceTextField.getText());

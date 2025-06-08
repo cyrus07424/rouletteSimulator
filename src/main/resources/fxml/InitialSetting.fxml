@@ -97,28 +97,7 @@
                             </children>
                         </HBox>
                         <Label text="出目の生成方法" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
-                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                            <children>
-                                <HBox spacing="10.0">
-                                    <children>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton1" mnemonicParsing="false" selected="true" text="ランダム">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="spotGenerateType"/>
-                                            </toggleGroup>
-                                        </RadioButton>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton2" mnemonicParsing="false" text="数字の順番" toggleGroup="$spotGenerateType"/>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton3" mnemonicParsing="false" text="盤上での順番" toggleGroup="$spotGenerateType"/>
-                                    </children>
-                                </HBox>
-                                <HBox spacing="10.0">
-                                    <children>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton4" mnemonicParsing="false" text="ランダム(赤のみ)" toggleGroup="$spotGenerateType"/>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton5" mnemonicParsing="false" text="ランダム(黒のみ)" toggleGroup="$spotGenerateType"/>
-                                        <RadioButton fx:id="spotGenerateTypeRadioButton6" mnemonicParsing="false" text="ランダム(1以外)" toggleGroup="$spotGenerateType"/>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
+                        <ComboBox fx:id="spotGenerateTypeComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                         <Label layoutX="10.0" layoutY="17.0" text="戦略" GridPane.halignment="RIGHT"
                                GridPane.rowIndex="7"/>
                         <Button fx:id="selectStrategyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
