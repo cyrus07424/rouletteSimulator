@@ -8,16 +8,17 @@ import application.RouletteContext;
 import cell.SimulationModeStrategyCell;
 import enums.Spot;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Button;
 import javafx.stage.WindowEvent;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
 import model.Bet;
 import strategy.BaseStrategy;
 import utils.LogHelper;
@@ -94,11 +95,6 @@ public class SimulationModeController extends BaseController {
 	@FXML
 	private Button stopButton;
 
-	/**
-	 * 出目履歴のObservableList (メモリリーク対策のため再利用).
-	 */
-	private ObservableList<Spot> spotHistoryObservableList;
-
 	@Override
 	public void setOnCloseRequest(WindowEvent event) {
 		// メインループを終了
@@ -111,24 +107,23 @@ public class SimulationModeController extends BaseController {
 	public void initialize(URL location, ResourceBundle resources) {
 		// 初期化完了後に実行
 		Platform.runLater(() -> {
-			// ボタンの初期状態を設定
+			// 制御ボタンの初期状態を設定
 			resumeButton.setDisable(true);
-			
+
 			// ヒートマップビューを初期化
 			spotHeatmapView = new SpotHeatmapView(rouletteContext);
 			heatmapScrollPane.setContent(spotHeatmapView);
-			
-			// リストビューを初期化
+
+			// 戦略一覧リストビューを初期化
 			strategyListView.setCellFactory(listView -> new SimulationModeStrategyCell(rouletteContext));
 			strategyListView.setItems(
 					StrategyHelper.createStrategyList(StrategyHelper.getEnableStrategyClassSet(), rouletteContext));
 
-			// 出目履歴のObservableListを初期化 (メモリリーク対策)
-			spotHistoryObservableList = FXCollections.observableArrayList();
-			spotHistoryListView.setItems(spotHistoryObservableList);
+			// 出目履歴のObservableList
+			ObservableList<Spot> spotHistoryObservableList = FXCollections.observableArrayList();
 
 			// 出目履歴リストビューを初期化
-			spotHistoryListView.setCellFactory(listView -> new javafx.scene.control.ListCell<Spot>() {
+			spotHistoryListView.setCellFactory(listView -> new ListCell<Spot>() {
 				@Override
 				protected void updateItem(Spot spot, boolean empty) {
 					super.updateItem(spot, empty);
@@ -148,6 +143,7 @@ public class SimulationModeController extends BaseController {
 					}
 				}
 			});
+			spotHistoryListView.setItems(spotHistoryObservableList);
 
 			// メインループを行うサービス
 			mainLoopService = new ScheduledService<Boolean>() {
@@ -182,10 +178,10 @@ public class SimulationModeController extends BaseController {
 								// 戦略一覧をソート
 								strategyListView.getItems().sort(BaseStrategy.getBalanceComparator());
 
-								// リストビューを最新化
+								// 戦略一覧リストビューを最新化
 								strategyListView.refresh();
 
-								// 出目履歴リストビューを更新 (メモリリーク対策: 既存のObservableListを更新)
+								// 出目履歴リストビューを最新化
 								spotHistoryObservableList.setAll(rouletteContext.spotHistoryList);
 								// 最新の出目が見えるようにスクロール
 								if (!spotHistoryObservableList.isEmpty()) {
@@ -199,7 +195,7 @@ public class SimulationModeController extends BaseController {
 								redRateLabel.setText(String.format("%.2f%%", rouletteContext.getRedRate() * 100));
 								greenRateLabel.setText(String.format("%.2f%%", rouletteContext.getGreenRate() * 100));
 								blackRateLabel.setText(String.format("%.2f%%", rouletteContext.getBlackRate() * 100));
-								
+
 								// ヒートマップを更新
 								if (spotHeatmapView != null) {
 									spotHeatmapView.updateHeatmap();
@@ -215,6 +211,7 @@ public class SimulationModeController extends BaseController {
 					};
 				}
 			};
+
 			// シミュレーションを自動開始
 			mainLoopService.start();
 		});
@@ -274,9 +271,8 @@ public class SimulationModeController extends BaseController {
 		if (mainLoopService != null) {
 			mainLoopService.cancel();
 		}
+		// ステージを終了
+		getThisStage().close();
 		LogHelper.info("シミュレーションを終了しました");
-		
-		// 初期設定画面に戻る
-		BaseController.openInitSetting(getThisStage());
 	}
 }

@@ -19,7 +19,7 @@
             <BorderPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </BorderPane.margin>
-            <ListView fx:id="strategyListView" prefHeight="600.0" prefWidth="500.0">
+            <ListView fx:id="strategyListView" prefHeight="600.0" prefWidth="550.0">
                 <HBox.margin>
                     <Insets right="5.0" />
                 </HBox.margin>
