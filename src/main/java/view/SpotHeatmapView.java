@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import application.RouletteContext;
+import enums.HeatmapLayoutType;
+import enums.RouletteType;
 import enums.Spot;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -34,31 +36,176 @@ public class SpotHeatmapView extends GridPane {
 	 * ヒートマップを初期化.
 	 */
 	private void initializeHeatmap() {
-		// ヒートマップのグリッドサイズ (6列 x 7行で0-36と00を配置)
-		spotLabels = new Label[7][6];
+		// ホイール配置を取得
+		Spot[] wheelLayout = Spot.getWheelLayout(rouletteContext.rouletteType);
+		
+		// レイアウトタイプに基づいて初期化
+		if (rouletteContext.heatmapLayoutType == HeatmapLayoutType.CIRCULAR) {
+			// 円形配置を試行、失敗した場合は通常のグリッド配置にフォールバック
+			if (tryCircularLayout(wheelLayout)) {
+				return;
+			}
+		}
+		
+		// 四角形配置または円形配置失敗時のフォールバック
+		initializeRectangularLayout(wheelLayout);
+	}
+
+	/**
+	 * 円形レイアウトでヒートマップを初期化を試行.
+	 * 
+	 * @param wheelLayout ホイール配置
+	 * @return 成功した場合true
+	 */
+	private boolean tryCircularLayout(Spot[] wheelLayout) {
+		try {
+			int numSpots = wheelLayout.length;
+			
+			// 円の半径を計算（スポット数に基づく）
+			double radius = Math.max(4, numSpots / (2 * Math.PI));
+			int gridSize = (int) (radius * 2 + 4); // マージンを追加
+			
+			spotLabels = new Label[gridSize][gridSize];
+			
+			// グリッドのスタイル設定
+			setHgap(2);
+			setVgap(2);
+			setStyle("-fx-padding: 5;");
+
+			double centerX = gridSize / 2.0;
+			double centerY = gridSize / 2.0;
+
+			// 各スポットを円形に配置
+			for (int i = 0; i < numSpots; i++) {
+				double angle = 2 * Math.PI * i / numSpots - Math.PI / 2; // -π/2で12時方向から開始
+				
+				int x = (int) Math.round(centerX + radius * Math.cos(angle));
+				int y = (int) Math.round(centerY + radius * Math.sin(angle));
+				
+				// グリッド範囲内かチェック
+				if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+					Label label = createSpotLabel(wheelLayout[i]);
+					spotLabels[y][x] = label;
+					add(label, x, y);
+				} else {
+					// 範囲外の場合は円形配置失敗
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			// 例外が発生した場合は円形配置失敗
+			return false;
+		}
+	}
+
+	/**
+	 * 四角形レイアウトでヒートマップを初期化.
+	 * より正方形に近い形でコンパクトに配置する.
+	 * 
+	 * @param wheelLayout ホイール配置
+	 */
+	private void initializeRectangularLayout(Spot[] wheelLayout) {
+		// グリッドサイズを動的に計算（よりコンパクトな配置）
+		int numSpots = wheelLayout.length;
+		int cols = calculateCompactColumns(numSpots);
+		int rows = (int) Math.ceil((double) numSpots / cols);
+		
+		spotLabels = new Label[rows][cols];
 		
 		// グリッドのスタイル設定
 		setHgap(2);
 		setVgap(2);
 		setStyle("-fx-padding: 5;");
 
-		// 利用可能な出目リストを取得
-		List<Spot> availableSpots = Spot.getAvailableList(rouletteContext.rouletteType);
-		
-		// ラベルを作成して配置
+		// ホイール順序でラベルを作成して配置
 		int row = 0;
 		int col = 0;
 		
-		for (Spot spot : availableSpots) {
+		for (Spot spot : wheelLayout) {
 			Label label = createSpotLabel(spot);
 			spotLabels[row][col] = label;
 			add(label, col, row);
 			
 			col++;
-			if (col >= 6) {
+			if (col >= cols) {
 				col = 0;
 				row++;
 			}
+		}
+	}
+
+	/**
+	 * 通常のグリッドレイアウトでヒートマップを初期化.
+	 * 
+	 * @param wheelLayout ホイール配置
+	 */
+	private void initializeGridLayout(Spot[] wheelLayout) {
+		// グリッドサイズを動的に計算
+		int numSpots = wheelLayout.length;
+		int cols = calculateOptimalColumns(numSpots);
+		int rows = (int) Math.ceil((double) numSpots / cols);
+		
+		spotLabels = new Label[rows][cols];
+		
+		// グリッドのスタイル設定
+		setHgap(2);
+		setVgap(2);
+		setStyle("-fx-padding: 5;");
+
+		// ホイール順序でラベルを作成して配置
+		int row = 0;
+		int col = 0;
+		
+		for (Spot spot : wheelLayout) {
+			Label label = createSpotLabel(spot);
+			spotLabels[row][col] = label;
+			add(label, col, row);
+			
+			col++;
+			if (col >= cols) {
+				col = 0;
+				row++;
+			}
+		}
+	}
+
+	/**
+	 * よりコンパクトな配置のための列数を計算.
+	 * 
+	 * @param numSpots 出目数
+	 * @return コンパクトな列数
+	 */
+	private int calculateCompactColumns(int numSpots) {
+		// より正方形に近く、少ない行列数になるように計算
+		int cols = (int) Math.ceil(Math.sqrt(numSpots));
+		
+		// 特定のスポット数に対して最適化
+		if (numSpots <= 36) {
+			return Math.min(cols, 8); // 最大8列に制限
+		} else if (numSpots <= 37) {
+			return Math.min(cols, 8); // 37スポット（ヨーロピアン）
+		} else if (numSpots <= 38) {
+			return Math.min(cols, 8); // 38スポット（アメリカン）
+		} else {
+			return Math.min(cols, 10); // それ以上の場合
+		}
+	}
+
+	/**
+	 * 出目数に基づいて最適な列数を計算.
+	 * 
+	 * @param numSpots 出目数
+	 * @return 最適な列数
+	 */
+	private int calculateOptimalColumns(int numSpots) {
+		// より正方形に近い形になるように列数を決定
+		if (numSpots <= 36) {
+			return 6; // 6x6 or 6x7
+		} else if (numSpots <= 42) {
+			return 7; // 7x6 or 7x7
+		} else {
+			return 8; // 8列以上
 		}
 	}
 

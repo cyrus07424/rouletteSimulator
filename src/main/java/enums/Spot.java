@@ -538,14 +538,13 @@ public enum Spot {
 	};
 
 	/**
-	 * 1-36ルーレットのホイール配置(0と00を除く).
+	 * 1-36ルーレットのホイール配置(0と00を除く). 1から36まで順番に配置.
 	 */
 	private static final Spot[] ONE_TO_36_WHEEL = {
-		SPOT_32, SPOT_15, SPOT_19, SPOT_04, SPOT_21, SPOT_02, SPOT_25,
-		SPOT_17, SPOT_34, SPOT_06, SPOT_27, SPOT_13, SPOT_36, SPOT_11, SPOT_30, SPOT_08,
-		SPOT_23, SPOT_10, SPOT_05, SPOT_24, SPOT_16, SPOT_33, SPOT_01, SPOT_20, SPOT_14,
-		SPOT_31, SPOT_09, SPOT_22, SPOT_18, SPOT_29, SPOT_07, SPOT_28, SPOT_12, SPOT_35,
-		SPOT_03, SPOT_26
+		SPOT_01, SPOT_02, SPOT_03, SPOT_04, SPOT_05, SPOT_06, SPOT_07, SPOT_08, SPOT_09,
+		SPOT_10, SPOT_11, SPOT_12, SPOT_13, SPOT_14, SPOT_15, SPOT_16, SPOT_17, SPOT_18,
+		SPOT_19, SPOT_20, SPOT_21, SPOT_22, SPOT_23, SPOT_24, SPOT_25, SPOT_26, SPOT_27,
+		SPOT_28, SPOT_29, SPOT_30, SPOT_31, SPOT_32, SPOT_33, SPOT_34, SPOT_35, SPOT_36
 	};
 
 	/**
@@ -554,7 +553,7 @@ public enum Spot {
 	 * @param rouletteType ルーレットの種類
 	 * @return ホイール配置
 	 */
-	private static Spot[] getWheelLayout(RouletteType rouletteType) {
+	public static Spot[] getWheelLayout(RouletteType rouletteType) {
 		switch (rouletteType) {
 			case EUROPEAN_STYLE:
 				return EUROPEAN_WHEEL;
