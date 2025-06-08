@@ -19,6 +19,9 @@ public class SpotHeatmapView extends GridPane {
 
 	private RouletteContext rouletteContext;
 	private Label[][] spotLabels;
+	
+	// Base style for spot labels to avoid memory leaks from style concatenation
+	private static final String BASE_SPOT_LABEL_STYLE = "-fx-alignment: center; -fx-border-color: gray; -fx-border-width: 1;";
 
 	/**
 	 * コンストラクタ.
@@ -282,7 +285,7 @@ public class SpotHeatmapView extends GridPane {
 		Label label = new Label(getSpotDisplayText(spot));
 		label.setMinSize(35, 25);
 		label.setMaxSize(35, 25);
-		label.setStyle("-fx-alignment: center; -fx-border-color: gray; -fx-border-width: 1;");
+		label.setStyle(BASE_SPOT_LABEL_STYLE);
 		label.setFont(Font.font("System", FontWeight.BOLD, 9));
 
 		// 初期色設定
@@ -303,7 +306,7 @@ public class SpotHeatmapView extends GridPane {
 		if (intensity == 0) {
 			// 出現していない場合は白背景
 			String textColor = spot.isRed() ? "red" : (spot.isBlack() ? "black" : "green");
-			label.setStyle(label.getStyle() + "; -fx-background-color: white; -fx-text-fill: " + textColor + ";");
+			label.setStyle(BASE_SPOT_LABEL_STYLE + "; -fx-background-color: white; -fx-text-fill: " + textColor + ";");
 		} else {
 			// 強度に基づいて背景色と文字色を決定
 			String backgroundColor;
@@ -324,7 +327,7 @@ public class SpotHeatmapView extends GridPane {
 				textColor = intensity > 0.5 ? "white" : "green";
 			}
 
-			label.setStyle(label.getStyle() + "; -fx-background-color: " + backgroundColor +
+			label.setStyle(BASE_SPOT_LABEL_STYLE + "; -fx-background-color: " + backgroundColor +
 					"; -fx-text-fill: " + textColor + ";");
 		}
 	}
