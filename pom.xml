@@ -18,6 +18,20 @@
 	</properties>
 
 	<dependencies>
+		<!-- JavaFX Controls -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>11.0.1</version>
+		</dependency>
+		
+		<!-- JavaFX FXML -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>11.0.1</version>
+		</dependency>
+
 		<!-- deeplearning4j-core: contains main functionality and neural networks -->
 		<dependency>
 			<groupId>org.deeplearning4j</groupId>

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -68,4 +69,24 @@
             </HBox>
         </VBox>
     </top>
+    <right>
+        <VBox BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+            <Label text="出目ヒートマップ">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Label>
+            <ScrollPane fitToWidth="true" fitToHeight="true" fx:id="heatmapScrollPane">
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </ScrollPane>
+        </VBox>
+    </right>
 </BorderPane>
