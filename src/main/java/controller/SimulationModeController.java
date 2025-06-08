@@ -58,6 +58,12 @@ public class SimulationModeController extends BaseController {
 	private ListView<BaseStrategy> strategyListView;
 
 	/**
+	 * 出目履歴リストビュー.
+	 */
+	@FXML
+	private ListView<Spot> spotHistoryListView;
+
+	/**
 	 * ヒートマップ用スクロールペイン.
 	 */
 	@FXML
@@ -94,6 +100,28 @@ public class SimulationModeController extends BaseController {
 			strategyListView.setItems(
 					StrategyHelper.createStrategyList(StrategyHelper.getEnableStrategyClassSet(), rouletteContext));
 
+			// 出目履歴リストビューを初期化
+			spotHistoryListView.setCellFactory(listView -> new javafx.scene.control.ListCell<Spot>() {
+				@Override
+				protected void updateItem(Spot spot, boolean empty) {
+					super.updateItem(spot, empty);
+					if (empty || spot == null) {
+						setText(null);
+						setStyle("");
+					} else {
+						setText(String.valueOf(spot.getNumber()));
+						// 色に応じて背景色を設定
+						if (spot.isRed()) {
+							setStyle("-fx-background-color: #ffcccc;");
+						} else if (spot.isBlack()) {
+							setStyle("-fx-background-color: #cccccc;");
+						} else if (spot.isGreen()) {
+							setStyle("-fx-background-color: #ccffcc;");
+						}
+					}
+				}
+			});
+
 			// メインループを行うサービス
 			mainLoopService = new ScheduledService<Boolean>() {
 
@@ -129,6 +157,15 @@ public class SimulationModeController extends BaseController {
 
 								// リストビューを最新化
 								strategyListView.refresh();
+
+								// 出目履歴リストビューを更新
+								javafx.collections.ObservableList<Spot> spotHistoryObservableList = 
+									javafx.collections.FXCollections.observableArrayList(rouletteContext.spotHistoryList);
+								spotHistoryListView.setItems(spotHistoryObservableList);
+								// 最新の出目が見えるようにスクロール
+								if (!spotHistoryObservableList.isEmpty()) {
+									spotHistoryListView.scrollTo(spotHistoryObservableList.size() - 1);
+								}
 
 								// 現在の試行回数を表示
 								currentLoopCountLabel.setText(String.valueOf(rouletteContext.currentLoopCount));

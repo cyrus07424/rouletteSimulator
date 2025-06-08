@@ -16,6 +16,22 @@
     <center>
         <ListView fx:id="strategyListView" prefHeight="600.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
     </center>
+    <left>
+        <VBox BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+            <Label text="出目履歴">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Label>
+            <ListView fx:id="spotHistoryListView" prefHeight="600.0" prefWidth="200.0" />
+        </VBox>
+    </left>
     <top>
         <VBox BorderPane.alignment="CENTER">
             <BorderPane.margin>
