@@ -50,6 +50,14 @@ public enum BetType {
 					break;
 				}
 			}
+			case AMERICAN_STYLE: {
+				switch (betType) {
+				case CORNER_0_1_2_3:
+					continue;
+				default:
+					break;
+				}
+			}
 			default:
 				break;
 			}
@@ -167,6 +175,9 @@ public enum BetType {
 		case SPLIT_32_35:
 		case SPLIT_33_36:
 			return 18;
+		case STREET_0_1_2:
+		case STREET_0_00_2:
+		case STREET_00_2_3:
 		case STREET_1_2_3:
 		case STREET_4_5_6:
 		case STREET_7_8_9:
@@ -180,6 +191,7 @@ public enum BetType {
 		case STREET_31_32_33:
 		case STREET_34_35_36:
 			return 12;
+		case CORNER_0_1_2_3:
 		case CORNER_1_2_4_5:
 		case CORNER_2_3_5_6:
 		case CORNER_4_5_7_8:

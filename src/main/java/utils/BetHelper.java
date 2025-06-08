@@ -549,10 +549,10 @@ public class BetHelper {
 				BetType.CORNER_1_2_4_5, BetType.CORNER_2_3_5_6, BetType.CORNER_4_5_7_8, BetType.CORNER_5_6_8_9,
 				BetType.CORNER_7_8_10_11, BetType.CORNER_8_9_11_12, BetType.CORNER_10_11_13_14,
 				BetType.CORNER_11_12_14_15, BetType.CORNER_13_14_16_17, BetType.CORNER_14_15_17_18,
-				BetType.CORNER_19_20_22_23, BetType.CORNER_20_21_23_24, BetType.CORNER_22_23_25_26,
-				BetType.CORNER_23_24_26_27, BetType.CORNER_25_26_28_29, BetType.CORNER_26_27_29_30,
-				BetType.CORNER_28_29_31_32, BetType.CORNER_29_30_32_33, BetType.CORNER_31_32_34_35,
-				BetType.CORNER_32_33_35_36 }) {
+				BetType.CORNER_16_17_19_20, BetType.CORNER_17_18_20_21, BetType.CORNER_19_20_22_23,
+				BetType.CORNER_20_21_23_24, BetType.CORNER_22_23_25_26, BetType.CORNER_23_24_26_27,
+				BetType.CORNER_25_26_28_29, BetType.CORNER_26_27_29_30, BetType.CORNER_28_29_31_32,
+				BetType.CORNER_29_30_32_33, BetType.CORNER_31_32_34_35, BetType.CORNER_32_33_35_36 }) {
 			if (isWin(betType, spot)) {
 				betTypeList.add(betType);
 			}
