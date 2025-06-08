@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import application.Main;
 import application.RouletteContext;
 import constants.Configurations;
+import enums.HeatmapLayoutType;
 import enums.RouletteType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -71,6 +72,15 @@ public class InitialSettingController extends BaseController {
 
 	@FXML
 	private RadioButton runModeRadioButton2;
+
+	/**
+	 * ヒートマップレイアウト.
+	 */
+	@FXML
+	private RadioButton heatmapLayoutRadioButton1;
+
+	@FXML
+	private RadioButton heatmapLayoutRadioButton2;
 
 	/**
 	 * 戦略選択ボタン.
@@ -164,12 +174,22 @@ public class InitialSettingController extends BaseController {
 		} else if (rouletteTypeRadioButton3.isSelected()) {
 			rouletteType = RouletteType.AMERICAN_STYLE;
 		}
+		
+		// ヒートマップレイアウトを取得
+		HeatmapLayoutType heatmapLayoutType = null;
+		if (heatmapLayoutRadioButton1.isSelected()) {
+			heatmapLayoutType = HeatmapLayoutType.CIRCULAR;
+		} else if (heatmapLayoutRadioButton2.isSelected()) {
+			heatmapLayoutType = HeatmapLayoutType.RECTANGULAR;
+		}
+		
 		long initialBalance = Long.parseLong(initialBalanceTextField.getText());
 		long minimumBet = Long.parseLong(minimumBetTextField.getText());
 		long maximumBet = Long.parseLong(maximumBetTextField.getText());
 
 		// 設定値を出力
 		LogHelper.info("ルーレットのタイプ=" + rouletteType.name());
+		LogHelper.info("ヒートマップレイアウト=" + heatmapLayoutType.name());
 		LogHelper.info("初期所持金=" + initialBalance);
 		LogHelper.info("最小ベット額=" + minimumBet);
 		LogHelper.info("最大ベット額=" + maximumBet);
@@ -180,7 +200,7 @@ public class InitialSettingController extends BaseController {
 		}
 
 		// ルーレットのコンテキストを作成
-		RouletteContext context = new RouletteContext(rouletteType, initialBalance, minimumBet, maximumBet);
+		RouletteContext context = new RouletteContext(rouletteType, heatmapLayoutType, initialBalance, minimumBet, maximumBet);
 		context.simulationSpeed = (long) simulationSpeedSlider.getValue();
 		return context;
 	}
