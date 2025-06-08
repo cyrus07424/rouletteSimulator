@@ -235,6 +235,13 @@ public enum BetType {
 
 	/**
 	 * ベット台上での位置を取得.
+	 * ルーレットテーブル上の座標系を使用します：
+	 * - x軸: 左から右 (0から11)
+	 * - y軸: 下から上 (0から3)
+	 * - 数字の配置: 3  6  9  12 15 18 21 24 27 30 33 36 (y=1)
+	 *              2  5  8  11 14 17 20 23 26 29 32 35 (y=2)  
+	 *              1  4  7  10 13 16 19 22 25 28 31 34 (y=3)
+	 *              0, 00は特別位置 (y=0)
 	 * 
 	 * @return ベット台上での位置座標 [x, y] (見つからない場合はnull)
 	 */
@@ -320,9 +327,9 @@ public enum BetType {
 			
 			// Split bets - 隣接する2つの数字のベット (横方向)
 			case SPLIT_1_2:
-				return new int[]{0, 2}; // 1と2の間
+				return new int[]{0, 2}; // 1と2の間 (0.5 adjustment for between)
 			case SPLIT_2_3:
-				return new int[]{0, 1}; // 2と3の間
+				return new int[]{0, 1}; // 2と3の間 
 			case SPLIT_4_5:
 				return new int[]{1, 2}; 
 			case SPLIT_5_6:
@@ -370,7 +377,7 @@ public enum BetType {
 			
 			// Split bets - 隣接する2つの数字のベット (縦方向)
 			case SPLIT_1_4:
-				return new int[]{0, 3}; // 1と4の間
+				return new int[]{0, 3}; // 1と4の間 (縦方向は同じ位置で近似)
 			case SPLIT_2_5:
 				return new int[]{0, 2}; 
 			case SPLIT_3_6:
@@ -496,9 +503,12 @@ public enum BetType {
 
 	/**
 	 * 他のベットタイプとの、ベット台上での物理的な距離を取得.
+	 * フラワーベットなどの複雑なベットパターンを実装する際に、
+	 * チップを花びらのように配置する距離計算に使用できます。
 	 *
 	 * @param otherBetType 比較対象のベットタイプ
 	 * @return 物理的な距離（ユークリッド距離）
+	 * @throws IllegalArgumentException otherBetTypeがnullまたは位置が定義されていない場合
 	 */
 	public double getPhysicalDistance(BetType otherBetType) {
 		if (otherBetType == null) {
