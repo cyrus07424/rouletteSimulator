@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -86,6 +87,14 @@
                       </Label>
                </children>
             </GridPane>
+            </HBox>
+            <HBox spacing="10.0">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <Button fx:id="pauseButton" text="一時停止" onAction="#onPauseButtonClick" />
+                <Button fx:id="resumeButton" text="再開" onAction="#onResumeButtonClick" disabled="true" />
+                <Button fx:id="stopButton" text="終了" onAction="#onStopButtonClick" />
             </HBox>
         </VBox>
     </top>
