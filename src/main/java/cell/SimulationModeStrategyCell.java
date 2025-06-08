@@ -7,6 +7,9 @@ import application.RouletteContext;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.paint.Color;
@@ -108,6 +111,24 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 	private Label winningAverageLabel;
 
 	/**
+	 * 所持金履歴チャート.
+	 */
+	@FXML
+	private LineChart<Number, Number> balanceHistoryChart;
+
+	/**
+	 * チャートのX軸.
+	 */
+	@FXML
+	private NumberAxis chartXAxis;
+
+	/**
+	 * チャートのY軸.
+	 */
+	@FXML
+	private NumberAxis chartYAxis;
+
+	/**
 	 * コンストラクタ.
 	 *
 	 * @param rouletteContext
@@ -158,6 +179,9 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 			averageTotalPayoutLabel.setText(NUMBER_FORMAT.format(strategy.getAverageTotalPayoutValue()));
 			winningAverageLabel.setText(String.format("%.2f%%", strategy.getWinningAverage() * 100));
 
+			// 所持金履歴チャートを更新
+			updateBalanceHistoryChart(strategy);
+
 			// 背景色を設定
 			if (strategy.isLive()) {
 				cellContainer.setStyle("");
@@ -166,5 +190,48 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 			}
 			setGraphic(cellContainer);
 		}
+	}
+
+	/**
+	 * 所持金履歴チャートを更新.
+	 *
+	 * @param strategy 戦略
+	 */
+	private void updateBalanceHistoryChart(BaseStrategy strategy) {
+		// チャートデータをクリア
+		balanceHistoryChart.getData().clear();
+
+		// 履歴データが存在しない場合は何もしない
+		if (strategy.balanceHistoryList.isEmpty()) {
+			return;
+		}
+
+		// データシリーズを作成
+		XYChart.Series<Number, Number> series = new XYChart.Series<>();
+		
+		// 履歴データをチャートに追加
+		int index = 0;
+		for (Long balance : strategy.balanceHistoryList) {
+			series.getData().add(new XYChart.Data<>(index, balance));
+			index++;
+		}
+
+		// シリーズをチャートに追加
+		balanceHistoryChart.getData().add(series);
+
+		// Y軸の範囲を調整（最小値と最大値を設定）
+		if (!strategy.balanceHistoryList.isEmpty()) {
+			long minBalance = strategy.balanceHistoryList.stream().mapToLong(Long::longValue).min().orElse(0);
+			long maxBalance = strategy.balanceHistoryList.stream().mapToLong(Long::longValue).max().orElse(0);
+			
+			// 少しマージンを持たせる
+			long margin = Math.max((maxBalance - minBalance) / 10, 1000);
+			chartYAxis.setLowerBound(minBalance - margin);
+			chartYAxis.setUpperBound(maxBalance + margin);
+		}
+
+		// X軸の範囲を設定
+		chartXAxis.setLowerBound(0);
+		chartXAxis.setUpperBound(Math.max(strategy.balanceHistoryList.size() - 1, 1));
 	}
 }
