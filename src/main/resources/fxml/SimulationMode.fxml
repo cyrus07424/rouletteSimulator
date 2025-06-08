@@ -93,7 +93,7 @@
                     <Insets top="10.0" />
                 </VBox.margin>
                 <Button fx:id="pauseButton" text="一時停止" onAction="#onPauseButtonClick" />
-                <Button fx:id="resumeButton" text="再開" onAction="#onResumeButtonClick" disabled="true" />
+                <Button fx:id="resumeButton" text="再開" onAction="#onResumeButtonClick" />
                 <Button fx:id="stopButton" text="終了" onAction="#onStopButtonClick" />
             </HBox>
         </VBox>

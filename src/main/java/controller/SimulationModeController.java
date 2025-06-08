@@ -111,6 +111,9 @@ public class SimulationModeController extends BaseController {
 	public void initialize(URL location, ResourceBundle resources) {
 		// 初期化完了後に実行
 		Platform.runLater(() -> {
+			// ボタンの初期状態を設定
+			resumeButton.setDisable(true);
+			
 			// ヒートマップビューを初期化
 			spotHeatmapView = new SpotHeatmapView(rouletteContext);
 			heatmapScrollPane.setContent(spotHeatmapView);
