@@ -232,4 +232,289 @@ public enum BetType {
 				throw new IllegalArgumentException();
 		}
 	}
+
+	/**
+	 * ベット台上での位置を取得.
+	 * 
+	 * @return ベット台上での位置座標 [x, y] (見つからない場合はnull)
+	 */
+	public int[] getTablePosition() {
+		switch (this) {
+			// Straight up bets - 数字の直接ベット
+			case ZERO:
+				return new int[]{1, 0}; // 0は特別な位置
+			case DOUBLE_ZERO:
+				return new int[]{0, 0}; // 00は特別な位置
+			case STRAIGHT_UP_1:
+				return new int[]{0, 3}; // 1は左下
+			case STRAIGHT_UP_2:
+				return new int[]{0, 2}; 
+			case STRAIGHT_UP_3:
+				return new int[]{0, 1}; // 3は左上
+			case STRAIGHT_UP_4:
+				return new int[]{1, 3};
+			case STRAIGHT_UP_5:
+				return new int[]{1, 2};
+			case STRAIGHT_UP_6:
+				return new int[]{1, 1};
+			case STRAIGHT_UP_7:
+				return new int[]{2, 3};
+			case STRAIGHT_UP_8:
+				return new int[]{2, 2};
+			case STRAIGHT_UP_9:
+				return new int[]{2, 1};
+			case STRAIGHT_UP_10:
+				return new int[]{3, 3};
+			case STRAIGHT_UP_11:
+				return new int[]{3, 2};
+			case STRAIGHT_UP_12:
+				return new int[]{3, 1};
+			case STRAIGHT_UP_13:
+				return new int[]{4, 3};
+			case STRAIGHT_UP_14:
+				return new int[]{4, 2};
+			case STRAIGHT_UP_15:
+				return new int[]{4, 1};
+			case STRAIGHT_UP_16:
+				return new int[]{5, 3};
+			case STRAIGHT_UP_17:
+				return new int[]{5, 2};
+			case STRAIGHT_UP_18:
+				return new int[]{5, 1};
+			case STRAIGHT_UP_19:
+				return new int[]{6, 3};
+			case STRAIGHT_UP_20:
+				return new int[]{6, 2};
+			case STRAIGHT_UP_21:
+				return new int[]{6, 1};
+			case STRAIGHT_UP_22:
+				return new int[]{7, 3};
+			case STRAIGHT_UP_23:
+				return new int[]{7, 2};
+			case STRAIGHT_UP_24:
+				return new int[]{7, 1};
+			case STRAIGHT_UP_25:
+				return new int[]{8, 3};
+			case STRAIGHT_UP_26:
+				return new int[]{8, 2};
+			case STRAIGHT_UP_27:
+				return new int[]{8, 1};
+			case STRAIGHT_UP_28:
+				return new int[]{9, 3};
+			case STRAIGHT_UP_29:
+				return new int[]{9, 2};
+			case STRAIGHT_UP_30:
+				return new int[]{9, 1};
+			case STRAIGHT_UP_31:
+				return new int[]{10, 3};
+			case STRAIGHT_UP_32:
+				return new int[]{10, 2};
+			case STRAIGHT_UP_33:
+				return new int[]{10, 1};
+			case STRAIGHT_UP_34:
+				return new int[]{11, 3};
+			case STRAIGHT_UP_35:
+				return new int[]{11, 2};
+			case STRAIGHT_UP_36:
+				return new int[]{11, 1};
+			
+			// Split bets - 隣接する2つの数字のベット (横方向)
+			case SPLIT_1_2:
+				return new int[]{0, 2}; // 1と2の間
+			case SPLIT_2_3:
+				return new int[]{0, 1}; // 2と3の間
+			case SPLIT_4_5:
+				return new int[]{1, 2}; 
+			case SPLIT_5_6:
+				return new int[]{1, 1};
+			case SPLIT_7_8:
+				return new int[]{2, 2};
+			case SPLIT_8_9:
+				return new int[]{2, 1};
+			case SPLIT_10_11:
+				return new int[]{3, 2};
+			case SPLIT_11_12:
+				return new int[]{3, 1};
+			case SPLIT_13_14:
+				return new int[]{4, 2};
+			case SPLIT_14_15:
+				return new int[]{4, 1};
+			case SPLIT_16_17:
+				return new int[]{5, 2};
+			case SPLIT_17_18:
+				return new int[]{5, 1};
+			case SPLIT_19_20:
+				return new int[]{6, 2};
+			case SPLIT_20_21:
+				return new int[]{6, 1};
+			case SPLIT_22_23:
+				return new int[]{7, 2};
+			case SPLIT_23_24:
+				return new int[]{7, 1};
+			case SPLIT_25_26:
+				return new int[]{8, 2};
+			case SPLIT_26_27:
+				return new int[]{8, 1};
+			case SPLIT_28_29:
+				return new int[]{9, 2};
+			case SPLIT_29_30:
+				return new int[]{9, 1};
+			case SPLIT_31_32:
+				return new int[]{10, 2};
+			case SPLIT_32_33:
+				return new int[]{10, 1};
+			case SPLIT_34_35:
+				return new int[]{11, 2};
+			case SPLIT_35_36:
+				return new int[]{11, 1};
+			
+			// Split bets - 隣接する2つの数字のベット (縦方向)
+			case SPLIT_1_4:
+				return new int[]{0, 3}; // 1と4の間
+			case SPLIT_2_5:
+				return new int[]{0, 2}; 
+			case SPLIT_3_6:
+				return new int[]{0, 1};
+			case SPLIT_4_7:
+				return new int[]{1, 3};
+			case SPLIT_5_8:
+				return new int[]{1, 2};
+			case SPLIT_6_9:
+				return new int[]{1, 1};
+			case SPLIT_7_10:
+				return new int[]{2, 3};
+			case SPLIT_8_11:
+				return new int[]{2, 2};
+			case SPLIT_9_12:
+				return new int[]{2, 1};
+			case SPLIT_10_13:
+				return new int[]{3, 3};
+			case SPLIT_11_14:
+				return new int[]{3, 2};
+			case SPLIT_12_15:
+				return new int[]{3, 1};
+			case SPLIT_13_16:
+				return new int[]{4, 3};
+			case SPLIT_14_17:
+				return new int[]{4, 2};
+			case SPLIT_15_18:
+				return new int[]{4, 1};
+			case SPLIT_16_19:
+				return new int[]{5, 3};
+			case SPLIT_17_20:
+				return new int[]{5, 2};
+			case SPLIT_18_21:
+				return new int[]{5, 1};
+			case SPLIT_19_22:
+				return new int[]{6, 3};
+			case SPLIT_20_23:
+				return new int[]{6, 2};
+			case SPLIT_21_24:
+				return new int[]{6, 1};
+			case SPLIT_22_25:
+				return new int[]{7, 3};
+			case SPLIT_23_26:
+				return new int[]{7, 2};
+			case SPLIT_24_27:
+				return new int[]{7, 1};
+			case SPLIT_25_28:
+				return new int[]{8, 3};
+			case SPLIT_26_29:
+				return new int[]{8, 2};
+			case SPLIT_27_30:
+				return new int[]{8, 1};
+			case SPLIT_28_31:
+				return new int[]{9, 3};
+			case SPLIT_29_32:
+				return new int[]{9, 2};
+			case SPLIT_30_33:
+				return new int[]{9, 1};
+			case SPLIT_31_34:
+				return new int[]{10, 3};
+			case SPLIT_32_35:
+				return new int[]{10, 2};
+			case SPLIT_33_36:
+				return new int[]{10, 1};
+			
+			// Special split bets with 0
+			case SPLIT_0_00:
+				return new int[]{0, 0}; // 0と00の間
+			case SPLIT_0_1:
+				return new int[]{0, 1}; // 0と1の間
+			case SPLIT_0_2:
+				return new int[]{0, 2}; // 0と2の間
+			case SPLIT_0_3:
+				return new int[]{0, 3}; // 0と3の間
+			
+			// Corner bets - 4つの数字の角のベット
+			case CORNER_1_2_4_5:
+				return new int[]{0, 2}; // 1,2,4,5の中心
+			case CORNER_2_3_5_6:
+				return new int[]{0, 1}; // 2,3,5,6の中心
+			case CORNER_4_5_7_8:
+				return new int[]{1, 2}; // 4,5,7,8の中心
+			case CORNER_5_6_8_9:
+				return new int[]{1, 1}; // 5,6,8,9の中心
+			case CORNER_7_8_10_11:
+				return new int[]{2, 2}; // 7,8,10,11の中心
+			case CORNER_8_9_11_12:
+				return new int[]{2, 1}; // 8,9,11,12の中心
+			case CORNER_10_11_13_14:
+				return new int[]{3, 2}; // 10,11,13,14の中心
+			case CORNER_11_12_14_15:
+				return new int[]{3, 1}; // 11,12,14,15の中心
+			case CORNER_13_14_16_17:
+				return new int[]{4, 2}; // 13,14,16,17の中心
+			case CORNER_14_15_17_18:
+				return new int[]{4, 1}; // 14,15,17,18の中心
+			case CORNER_19_20_22_23:
+				return new int[]{6, 2}; // 19,20,22,23の中心
+			case CORNER_20_21_23_24:
+				return new int[]{6, 1}; // 20,21,23,24の中心
+			case CORNER_21_23_25_26:
+				return new int[]{7, 2}; // 21,23,25,26の中心（注意：実際のコーナーではないが近似）
+			case CORNER_23_24_26_27:
+				return new int[]{7, 1}; // 23,24,26,27の中心
+			case CORNER_25_26_28_29:
+				return new int[]{8, 2}; // 25,26,28,29の中心
+			case CORNER_26_27_29_30:
+				return new int[]{8, 1}; // 26,27,29,30の中心
+			case CORNER_28_29_31_32:
+				return new int[]{9, 2}; // 28,29,31,32の中心
+			case CORNER_29_30_32_33:
+				return new int[]{9, 1}; // 29,30,32,33の中心
+			case CORNER_31_32_34_35:
+				return new int[]{10, 2}; // 31,32,34,35の中心
+			case CORNER_32_33_35_36:
+				return new int[]{10, 1}; // 32,33,35,36の中心
+			
+			// その他のベットタイプは中心点で近似
+			default:
+				return null; // 未対応のベットタイプ
+		}
+	}
+
+	/**
+	 * 他のベットタイプとの、ベット台上での物理的な距離を取得.
+	 *
+	 * @param otherBetType 比較対象のベットタイプ
+	 * @return 物理的な距離（ユークリッド距離）
+	 */
+	public double getPhysicalDistance(BetType otherBetType) {
+		if (otherBetType == null) {
+			throw new IllegalArgumentException("otherBetType cannot be null");
+		}
+
+		int[] thisPosition = this.getTablePosition();
+		int[] otherPosition = otherBetType.getTablePosition();
+
+		if (thisPosition == null || otherPosition == null) {
+			throw new IllegalArgumentException("One or both bet types do not have table positions defined");
+		}
+
+		// ユークリッド距離を計算
+		double dx = thisPosition[0] - otherPosition[0];
+		double dy = thisPosition[1] - otherPosition[1];
+		return Math.sqrt(dx * dx + dy * dy);
+	}
 }
