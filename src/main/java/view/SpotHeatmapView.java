@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import application.RouletteContext;
+import enums.RouletteType;
 import enums.Spot;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -34,31 +35,52 @@ public class SpotHeatmapView extends GridPane {
 	 * ヒートマップを初期化.
 	 */
 	private void initializeHeatmap() {
-		// ヒートマップのグリッドサイズ (6列 x 7行で0-36と00を配置)
-		spotLabels = new Label[7][6];
+		// ホイール配置を取得
+		Spot[] wheelLayout = Spot.getWheelLayout(rouletteContext.rouletteType);
+		
+		// グリッドサイズを動的に計算
+		int numSpots = wheelLayout.length;
+		int cols = calculateOptimalColumns(numSpots);
+		int rows = (int) Math.ceil((double) numSpots / cols);
+		
+		spotLabels = new Label[rows][cols];
 		
 		// グリッドのスタイル設定
 		setHgap(2);
 		setVgap(2);
 		setStyle("-fx-padding: 5;");
 
-		// 利用可能な出目リストを取得
-		List<Spot> availableSpots = Spot.getAvailableList(rouletteContext.rouletteType);
-		
-		// ラベルを作成して配置
+		// ホイール順序でラベルを作成して配置
 		int row = 0;
 		int col = 0;
 		
-		for (Spot spot : availableSpots) {
+		for (Spot spot : wheelLayout) {
 			Label label = createSpotLabel(spot);
 			spotLabels[row][col] = label;
 			add(label, col, row);
 			
 			col++;
-			if (col >= 6) {
+			if (col >= cols) {
 				col = 0;
 				row++;
 			}
+		}
+	}
+
+	/**
+	 * 出目数に基づいて最適な列数を計算.
+	 * 
+	 * @param numSpots 出目数
+	 * @return 最適な列数
+	 */
+	private int calculateOptimalColumns(int numSpots) {
+		// より正方形に近い形になるように列数を決定
+		if (numSpots <= 36) {
+			return 6; // 6x6 or 6x7
+		} else if (numSpots <= 42) {
+			return 7; // 7x6 or 7x7
+		} else {
+			return 8; // 8列以上
 		}
 	}
 
