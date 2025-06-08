@@ -38,6 +38,69 @@ public class SpotHeatmapView extends GridPane {
 		// ホイール配置を取得
 		Spot[] wheelLayout = Spot.getWheelLayout(rouletteContext.rouletteType);
 		
+		// 円形配置を試行、失敗した場合は通常のグリッド配置にフォールバック
+		if (tryCircularLayout(wheelLayout)) {
+			return;
+		}
+		
+		// 通常のグリッド配置（フォールバック）
+		initializeGridLayout(wheelLayout);
+	}
+
+	/**
+	 * 円形レイアウトでヒートマップを初期化を試行.
+	 * 
+	 * @param wheelLayout ホイール配置
+	 * @return 成功した場合true
+	 */
+	private boolean tryCircularLayout(Spot[] wheelLayout) {
+		try {
+			int numSpots = wheelLayout.length;
+			
+			// 円の半径を計算（スポット数に基づく）
+			double radius = Math.max(4, numSpots / (2 * Math.PI));
+			int gridSize = (int) (radius * 2 + 4); // マージンを追加
+			
+			spotLabels = new Label[gridSize][gridSize];
+			
+			// グリッドのスタイル設定
+			setHgap(2);
+			setVgap(2);
+			setStyle("-fx-padding: 5;");
+
+			double centerX = gridSize / 2.0;
+			double centerY = gridSize / 2.0;
+
+			// 各スポットを円形に配置
+			for (int i = 0; i < numSpots; i++) {
+				double angle = 2 * Math.PI * i / numSpots - Math.PI / 2; // -π/2で12時方向から開始
+				
+				int x = (int) Math.round(centerX + radius * Math.cos(angle));
+				int y = (int) Math.round(centerY + radius * Math.sin(angle));
+				
+				// グリッド範囲内かチェック
+				if (x >= 0 && x < gridSize && y >= 0 && y < gridSize) {
+					Label label = createSpotLabel(wheelLayout[i]);
+					spotLabels[y][x] = label;
+					add(label, x, y);
+				} else {
+					// 範囲外の場合は円形配置失敗
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			// 例外が発生した場合は円形配置失敗
+			return false;
+		}
+	}
+
+	/**
+	 * 通常のグリッドレイアウトでヒートマップを初期化.
+	 * 
+	 * @param wheelLayout ホイール配置
+	 */
+	private void initializeGridLayout(Spot[] wheelLayout) {
 		// グリッドサイズを動的に計算
 		int numSpots = wheelLayout.length;
 		int cols = calculateOptimalColumns(numSpots);
