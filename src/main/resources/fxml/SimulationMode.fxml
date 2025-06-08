@@ -95,6 +95,16 @@
                 <Button fx:id="pauseButton" text="一時停止" onAction="#onPauseButtonClick" />
                 <Button fx:id="resumeButton" text="再開" onAction="#onResumeButtonClick" />
                 <Button fx:id="stopButton" text="終了" onAction="#onStopButtonClick" />
+                <VBox spacing="5.0">
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                    <Label text="速度" style="-fx-font-weight: bold;" />
+                    <HBox spacing="5.0">
+                        <Slider fx:id="simulationSpeedSliderInMode" min="0" max="2000" value="1000" showTickLabels="false" showTickMarks="false" prefWidth="150.0"/>
+                        <Label fx:id="simulationSpeedLabelInMode" text="1000ms" prefWidth="50.0"/>
+                    </HBox>
+                </VBox>
             </HBox>
         </VBox>
     </top>

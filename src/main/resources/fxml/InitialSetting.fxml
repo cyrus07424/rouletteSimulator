@@ -32,6 +32,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
                         <Label text="ルーレットのタイプ" GridPane.halignment="RIGHT">
@@ -86,6 +87,13 @@
                                GridPane.rowIndex="5"/>
                         <Button fx:id="selectStrategyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
                                 text="戦略選択" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <Label text="シミュレーション速度" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                            <children>
+                                <Slider fx:id="simulationSpeedSlider" min="0" max="2000" value="1000" showTickLabels="true" showTickMarks="true" majorTickUnit="500" minorTickCount="4" prefWidth="200.0"/>
+                                <Label fx:id="simulationSpeedLabel" text="1000ms"/>
+                            </children>
+                        </HBox>
                     </children>
                 </GridPane>
                 <Button fx:id="startButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="スタート！">

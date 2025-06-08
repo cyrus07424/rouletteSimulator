@@ -10,8 +10,10 @@ import enums.RouletteType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -82,6 +84,18 @@ public class InitialSettingController extends BaseController {
 	@FXML
 	private Button startButton;
 
+	/**
+	 * シミュレーション速度スライダー.
+	 */
+	@FXML
+	private Slider simulationSpeedSlider;
+
+	/**
+	 * シミュレーション速度ラベル.
+	 */
+	@FXML
+	private Label simulationSpeedLabel;
+
 	@Override
 	public void setOnCloseRequest(WindowEvent event) {
 		// TODO
@@ -127,6 +141,12 @@ public class InitialSettingController extends BaseController {
 			// シミュレーションモード画面を表示
 			openSimulationMode(newStage, createRouletteContext());
 		});
+
+		// シミュレーション速度スライダーの変更監視
+		simulationSpeedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+			int speed = newValue.intValue();
+			simulationSpeedLabel.setText(speed + "ms");
+		});
 	}
 
 	/**
@@ -160,6 +180,8 @@ public class InitialSettingController extends BaseController {
 		}
 
 		// ルーレットのコンテキストを作成
-		return new RouletteContext(rouletteType, initialBalance, minimumBet, maximumBet);
+		RouletteContext context = new RouletteContext(rouletteType, initialBalance, minimumBet, maximumBet);
+		context.simulationSpeed = (long) simulationSpeedSlider.getValue();
+		return context;
 	}
 }

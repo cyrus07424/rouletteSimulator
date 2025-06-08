@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.stage.WindowEvent;
 import model.Bet;
 import strategy.BaseStrategy;
@@ -95,6 +96,18 @@ public class SimulationModeController extends BaseController {
 	@FXML
 	private Button stopButton;
 
+	/**
+	 * シミュレーション速度スライダー（シミュレーションモード内）.
+	 */
+	@FXML
+	private Slider simulationSpeedSliderInMode;
+
+	/**
+	 * シミュレーション速度ラベル（シミュレーションモード内）.
+	 */
+	@FXML
+	private Label simulationSpeedLabelInMode;
+
 	@Override
 	public void setOnCloseRequest(WindowEvent event) {
 		// メインループを終了
@@ -109,6 +122,17 @@ public class SimulationModeController extends BaseController {
 		Platform.runLater(() -> {
 			// 制御ボタンの初期状態を設定
 			resumeButton.setDisable(true);
+
+			// シミュレーション速度スライダーを初期化
+			simulationSpeedSliderInMode.setValue(rouletteContext.simulationSpeed);
+			simulationSpeedLabelInMode.setText(rouletteContext.simulationSpeed + "ms");
+			
+			// シミュレーション速度スライダーの変更監視
+			simulationSpeedSliderInMode.valueProperty().addListener((observable, oldValue, newValue) -> {
+				int speed = newValue.intValue();
+				rouletteContext.simulationSpeed = speed;
+				simulationSpeedLabelInMode.setText(speed + "ms");
+			});
 
 			// ヒートマップビューを初期化
 			spotHeatmapView = new SpotHeatmapView(rouletteContext);
@@ -153,7 +177,12 @@ public class SimulationModeController extends BaseController {
 					return new Task<Boolean>() {
 
 						@Override
-						protected Boolean call() {
+						protected Boolean call() throws Exception {
+							// スピード設定に応じたウェイト
+							if (rouletteContext.simulationSpeed > 0) {
+								Thread.sleep(rouletteContext.simulationSpeed);
+							}
+
 							// 出目を取得
 							Spot nextSpot = Spot.getRandomNextSpot(rouletteContext);
 
