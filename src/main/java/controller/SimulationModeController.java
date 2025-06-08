@@ -39,6 +39,11 @@ public class SimulationModeController extends BaseController {
 	private RouletteContext rouletteContext;
 
 	/**
+	 * 戦略一覧.
+	 */
+	private ObservableList<BaseStrategy> strategyList;
+
+	/**
 	 * 現在の試行回数.
 	 */
 	@FXML
@@ -120,13 +125,17 @@ public class SimulationModeController extends BaseController {
 	public void initialize(URL location, ResourceBundle resources) {
 		// 初期化完了後に実行
 		Platform.runLater(() -> {
+			// 戦略一覧を読み込み
+			strategyList = StrategyHelper.createStrategyList(StrategyHelper.getEnableStrategyClassSet(),
+					rouletteContext);
+
 			// 制御ボタンの初期状態を設定
 			resumeButton.setDisable(true);
 
 			// シミュレーション速度スライダーを初期化
 			simulationSpeedSliderInMode.setValue(rouletteContext.simulationSpeed);
 			simulationSpeedLabelInMode.setText(rouletteContext.simulationSpeed + "ms");
-			
+
 			// シミュレーション速度スライダーの変更監視
 			simulationSpeedSliderInMode.valueProperty().addListener((observable, oldValue, newValue) -> {
 				int speed = newValue.intValue();
@@ -140,8 +149,7 @@ public class SimulationModeController extends BaseController {
 
 			// 戦略一覧リストビューを初期化
 			strategyListView.setCellFactory(listView -> new SimulationModeStrategyCell(rouletteContext));
-			strategyListView.setItems(
-					StrategyHelper.createStrategyList(StrategyHelper.getEnableStrategyClassSet(), rouletteContext));
+			strategyListView.setItems(strategyList);
 
 			// 出目履歴のObservableList
 			ObservableList<Spot> spotHistoryObservableList = FXCollections.observableArrayList();
@@ -188,7 +196,7 @@ public class SimulationModeController extends BaseController {
 
 							// 精算処理
 							// 全ての戦略に対して実行
-							for (BaseStrategy strategy : strategyListView.getItems()) {
+							for (BaseStrategy strategy : strategyList) {
 								// ベット一覧を取得
 								List<Bet> betList = strategy.getNextBetList(rouletteContext);
 
@@ -234,6 +242,12 @@ public class SimulationModeController extends BaseController {
 							// コンソールに情報を表示
 							LogHelper.info(
 									String.format("試行回数=%d, 出目=%s", rouletteContext.currentLoopCount, nextSpot.name()));
+
+							// 全ての戦略が無効な場合
+							if (strategyList.stream().allMatch(strategy -> !strategy.isLive())) {
+								System.out.println("全ての戦略が無効です");
+								// TODO メインループを一時停止
+							}
 
 							return true;
 						}

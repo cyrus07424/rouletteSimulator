@@ -179,8 +179,12 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 			averageTotalPayoutLabel.setText(NUMBER_FORMAT.format(strategy.getAverageTotalPayoutValue()));
 			winningAverageLabel.setText(String.format("%.2f%%", strategy.getWinningAverage() * 100));
 
-			// 所持金履歴チャートを更新
-			updateBalanceHistoryChart(strategy);
+			try {
+				// 所持金履歴チャートを更新
+				updateBalanceHistoryChart(strategy);
+			} catch (Exception e) {
+				// NOP
+			}
 
 			// 背景色を設定
 			if (strategy.isLive()) {
@@ -208,7 +212,7 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 
 		// データシリーズを作成
 		XYChart.Series<Number, Number> series = new XYChart.Series<>();
-		
+
 		// 履歴データをチャートに追加
 		int index = 0;
 		for (Long balance : strategy.balanceHistoryList) {
@@ -223,7 +227,7 @@ public class SimulationModeStrategyCell extends ListCell<BaseStrategy> {
 		if (!strategy.balanceHistoryList.isEmpty()) {
 			long minBalance = strategy.balanceHistoryList.stream().mapToLong(Long::longValue).min().orElse(0);
 			long maxBalance = strategy.balanceHistoryList.stream().mapToLong(Long::longValue).max().orElse(0);
-			
+
 			// 少しマージンを持たせる
 			long margin = Math.max((maxBalance - minBalance) / 10, 1000);
 			chartYAxis.setLowerBound(minBalance - margin);

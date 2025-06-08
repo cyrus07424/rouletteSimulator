@@ -44,6 +44,7 @@ public class MartingaleStrategy2 extends BaseStrategy {
 			return Collections.singletonList(new Bet(useBetType, rouletteContext.minimumBet));
 		} else {
 			// 前回のベット額の倍額をベット
+			// FIXME 最大ベット額を考慮
 			return Collections.singletonList(new Bet(useBetType, (getLastTotalBetValue() * 2)));
 		}
 	}

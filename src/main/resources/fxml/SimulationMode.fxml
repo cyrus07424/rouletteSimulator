@@ -75,7 +75,7 @@
                     </HBox.margin>
                     <Label text="速度" style="-fx-font-weight: bold;" />
                     <HBox spacing="5.0">
-                        <Slider fx:id="simulationSpeedSliderInMode" min="0" max="2000" value="100" showTickLabels="false" showTickMarks="false" prefWidth="150.0"/>
+                        <Slider fx:id="simulationSpeedSliderInMode" min="0" max="1000" value="100" showTickLabels="false" showTickMarks="false" prefWidth="150.0"/>
                         <Label fx:id="simulationSpeedLabelInMode" text="100ms" prefWidth="50.0"/>
                     </HBox>
                 </VBox>
@@ -115,7 +115,7 @@
 	                    <Font name="System Bold" size="12.0" />
 	                </font>
 	            </Label>
-	            <ScrollPane fx:id="heatmapScrollPane" minWidth="300.0" prefWidth="375.0" fitToWidth="true" fitToHeight="true">
+	            <ScrollPane fx:id="heatmapScrollPane" minWidth="200.0" prefWidth="350.0" fitToWidth="true" fitToHeight="true">
 	                <VBox.margin>
 	                    <Insets />
 	                </VBox.margin>

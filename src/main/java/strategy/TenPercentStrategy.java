@@ -36,13 +36,15 @@ public class TenPercentStrategy extends BaseStrategy {
 
 	@Override
 	public List<Bet> getNextBetListImpl(RouletteContext rouletteContext) {
-		// 所持金の10%をベット
-		long value = currentBalance / 10;
-		if (0 < value) {
-			return Collections.singletonList(new Bet(USE_BET_TYPE, currentBalance / 10));
+		// 所持金の10%を計算
+		long value = Math.min(currentBalance / 10, rouletteContext.maximumBet);
+
+		// 最小ベット額より大きい場合
+		if (rouletteContext.minimumBet <= value) {
+			return Collections.singletonList(new Bet(USE_BET_TYPE, value));
 		} else {
-			// 1をベット
-			return Collections.singletonList(new Bet(USE_BET_TYPE, 1));
+			// FIXME 最小ベット額を使用
+			return Collections.singletonList(new Bet(USE_BET_TYPE, rouletteContext.minimumBet));
 		}
 	}
 }

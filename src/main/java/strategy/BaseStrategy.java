@@ -76,6 +76,11 @@ public abstract class BaseStrategy {
 	protected List<Bet> lastBetList;
 
 	/**
+	 * 前回の有効な戦略かどうかの値.
+	 */
+	protected boolean lastLive;
+
+	/**
 	 * 戦略名を取得.
 	 *
 	 * @return
@@ -168,11 +173,17 @@ public abstract class BaseStrategy {
 			minimumBalance = currentBalance;
 		}
 
-		// 所持金の履歴を更新
-		balanceHistoryList.offer(currentBalance);
-		if (Configurations.BALANCE_HISTORY_SIZE < balanceHistoryList.size()) {
-			balanceHistoryList.poll();
+		// 前回が有効な場合
+		if (lastLive) {
+			// 所持金の履歴を更新
+			balanceHistoryList.offer(currentBalance);
+			if (Configurations.BALANCE_HISTORY_SIZE < balanceHistoryList.size()) {
+				balanceHistoryList.poll();
+			}
 		}
+
+		// 前回の有効な戦略かどうかの値を更新
+		lastLive = isLive();
 	}
 
 	/**

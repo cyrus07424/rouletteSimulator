@@ -47,6 +47,7 @@ public class MartingaleStrategy4 extends BaseStrategy {
 		} else {
 			if (hasLastBet()) {
 				// 前回のベット額の3倍をベット
+				// FIXME 最大ベット額を考慮
 				long betValue = lastBetList.get(0).value * 3;
 				betList.add(new Bet(USE_BET_TYPE1, betValue));
 				betList.add(new Bet(USE_BET_TYPE2, betValue));
