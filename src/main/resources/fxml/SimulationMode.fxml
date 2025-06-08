@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -101,8 +98,8 @@
                     </HBox.margin>
                     <Label text="速度" style="-fx-font-weight: bold;" />
                     <HBox spacing="5.0">
-                        <Slider fx:id="simulationSpeedSliderInMode" min="0" max="2000" value="1000" showTickLabels="false" showTickMarks="false" prefWidth="150.0"/>
-                        <Label fx:id="simulationSpeedLabelInMode" text="1000ms" prefWidth="50.0"/>
+                        <Slider fx:id="simulationSpeedSliderInMode" min="0" max="2000" value="100" showTickLabels="false" showTickMarks="false" prefWidth="150.0"/>
+                        <Label fx:id="simulationSpeedLabelInMode" text="100ms" prefWidth="50.0"/>
                     </HBox>
                 </VBox>
             </HBox>

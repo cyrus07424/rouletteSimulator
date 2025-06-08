@@ -23,7 +23,7 @@
                 <GridPane hgap="10.0" vgap="5.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="196.0" prefWidth="243.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250"/>
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -90,8 +90,8 @@
                         <Label text="シミュレーション速度" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
                         <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <children>
-                                <Slider fx:id="simulationSpeedSlider" min="0" max="2000" value="1000" showTickLabels="true" showTickMarks="true" majorTickUnit="500" minorTickCount="4" prefWidth="200.0"/>
-                                <Label fx:id="simulationSpeedLabel" text="1000ms"/>
+                                <Slider fx:id="simulationSpeedSlider" min="0" max="2000" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="500" minorTickCount="4" prefWidth="200.0"/>
+                                <Label fx:id="simulationSpeedLabel" text="100ms"/>
                             </children>
                         </HBox>
                     </children>
