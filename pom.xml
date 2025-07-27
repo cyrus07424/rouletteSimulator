@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>25-ea+24</version>
+			<version>26-ea+1</version>
 		</dependency>
 	</dependencies>
 </project>
